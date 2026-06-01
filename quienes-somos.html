@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiénes somos – AMAE</title>
+
+  <link rel="icon" href="https://amae.pro/wp-content/uploads/2019/09/m-de-amae-e1687945093887.jpg" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:         #1c1c1c;
+      --bg-alt:     #242424;
+      --bg-dark:    #111111;
+      --accent:     #FF4A47;
+      --accent-h:   #e03c39;
+      --text:       #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --border:     rgba(255,255,255,0.09);
+      --font:       'Montserrat', sans-serif;
+      --nav-h:      68px;
+      --radius:     14px;
+      --t:          0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Header ── */
+    .header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--nav-h); background: rgba(24,24,24,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 16px; }
+    .nav-group { display: flex; align-items: center; gap: 2px; }
+    .nav-group a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 7px 11px; border-radius: 7px; letter-spacing: .02em; transition: color var(--t), background var(--t); }
+    .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-group a.active { color: #fff; font-weight: 700; }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
+    .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
+    .nav-social a { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); transition: color var(--t), background var(--t); }
+    .nav-social a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background var(--t), transform var(--t), box-shadow var(--t); }
+    .btn-red { background: var(--accent); color: #fff; }
+    .btn-red:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,74,71,.35); }
+    .btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.25); }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); transform: translateY(-1px); }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 6px; line-height: 1; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .mobile-menu-panel { position: absolute; top: var(--nav-h); left: 0; right: 0; z-index: 1; background: #1a1a1a; border-bottom: 1px solid var(--border); padding: 8px 0 20px; animation: slideDown .22s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+    .mobile-menu-panel a { display: block; padding: 12px 28px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); transition: color var(--t), background var(--t); }
+    .mobile-menu-panel a:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .mobile-menu-social { display: flex; gap: 8px; padding: 16px 28px 0; }
+    .mobile-menu-social a { width: 36px; height: 36px; border-radius: 8px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); border-bottom: none; }
+    .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── Page hero ── */
+    .page-hero { position: relative; padding-top: var(--nav-h); min-height: 60vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background-image: url('https://picsum.photos/seed/amae-about/1400/600'); background-size: cover; background-position: center 30%; filter: brightness(.35); }
+    .page-hero-gradient { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 0%, transparent 60%); }
+    .page-hero-content { position: relative; z-index: 1; padding: 72px 0 64px; }
+    .page-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .page-hero-title { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; letter-spacing: -.03em; text-transform: uppercase; line-height: .95; }
+    .page-hero-desc { margin-top: 20px; font-size: 16px; color: rgba(255,255,255,.7); max-width: 560px; line-height: 1.8; font-weight: 400; }
+
+    /* ── Stats bar ── */
+    .stats-bar { background: var(--bg-dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stats-bar-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 36px 24px; text-align: center; border-right: 1px solid var(--border); position: relative; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.03em; color: #fff; line-height: 1; }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
+
+    /* ── About intro ── */
+    .about-intro { padding: 96px 0; }
+    .about-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-intro-tag { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .about-intro-title { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 28px; }
+    .about-intro-body { color: var(--text-muted); font-size: 15px; line-height: 1.85; }
+    .about-intro-body p + p { margin-top: 18px; }
+    .about-intro-cta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img { width: 100%; border-radius: 18px; object-fit: cover; aspect-ratio: 4/3; }
+    .about-img-badge { position: absolute; bottom: -20px; left: 24px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+    .about-img-badge-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .about-img-badge-num { font-size: 1.4rem; font-weight: 900; line-height: 1; }
+    .about-img-badge-text { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+
+    /* ── Mission / Valores ── */
+    .values-section { padding: 0 0 96px; }
+    .section-header { margin-bottom: 52px; }
+    .section-tag { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.1; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .value-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: border-color var(--t), transform var(--t); }
+    .value-card:hover { border-color: rgba(255,255,255,.2); transform: translateY(-4px); }
+    .value-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,74,71,.12); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--accent); margin-bottom: 20px; }
+    .value-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .value-text { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+
+    /* ── History timeline ── */
+    .history-section { background: var(--bg-dark); padding: 96px 0; }
+    .timeline { position: relative; margin-top: 56px; }
+    .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-item { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 56px; position: relative; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item.right .timeline-content { grid-column: 2; padding-left: 52px; }
+    .timeline-item.left .timeline-content { grid-column: 1; padding-right: 52px; text-align: right; }
+    .timeline-dot { position: absolute; left: 50%; transform: translateX(-50%); top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-dark); box-shadow: 0 0 0 3px rgba(255,74,71,.25); z-index: 1; }
+    .timeline-year { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .timeline-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .timeline-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── Team ── */
+    .team-section { padding: 96px 0; }
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 52px; }
+    .team-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--t), transform var(--t), box-shadow var(--t); }
+    .team-card:hover { border-color: rgba(255,255,255,.2); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4); }
+    .team-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; filter: grayscale(30%); transition: filter var(--t); }
+    .team-card:hover .team-photo { filter: grayscale(0%); }
+    .team-info { padding: 20px 20px 22px; }
+    .team-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .team-role { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .team-bio { font-size: 12.5px; color: var(--text-muted); line-height: 1.65; }
+    .team-social { display: flex; gap: 6px; margin-top: 14px; }
+    .team-social a { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,.06); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted); transition: background var(--t), color var(--t); }
+    .team-social a:hover { background: var(--accent); color: #fff; }
+
+    /* ── Join CTA ── */
+    .join-section { background: var(--bg-dark); padding: 96px 0; border-top: 1px solid var(--border); }
+    .join-inner { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+    .join-tag { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .join-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; letter-spacing: -.025em; line-height: 1.1; }
+    .join-desc { margin-top: 16px; font-size: 15px; color: var(--text-muted); line-height: 1.75; max-width: 560px; }
+    .join-actions { display: flex; gap: 12px; flex-direction: column; flex-shrink: 0; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+    .footer-logo { height: 38px; width: auto; margin-bottom: 28px; }
+    .footer-nl-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-nl-form { display: flex; gap: 8px; }
+    .footer-nl-form input { flex: 1; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 7px; padding: 10px 14px; color: #fff; font-family: var(--font); font-size: 13px; outline: none; transition: border-color var(--t); }
+    .footer-nl-form input:focus { border-color: rgba(255,255,255,.35); }
+    .footer-nl-form input::placeholder { color: rgba(255,255,255,.3); }
+    .footer-nl-form button { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 10px 18px; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; transition: background var(--t); white-space: nowrap; }
+    .footer-nl-form button:hover { background: var(--accent-h); }
+    .footer-social { display: flex; gap: 6px; margin-top: 20px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); color: var(--text-muted); transition: background var(--t), color var(--t); }
+    .footer-social a:hover { background: var(--accent); color: #fff; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,.6); transition: color var(--t); }
+    .footer-links a:hover { color: #fff; }
+    .footer-join-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,.3); transition: color var(--t); }
+    .footer-legal a:hover { color: rgba(255,255,255,.65); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1080px) {
+      .nav-group { display: none; }
+      .nav-mobile-btn { display: flex; }
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .about-intro-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-img-wrap { order: -1; }
+      .about-img-badge { display: none; }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); border-top: 1px solid var(--border); }
+      .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+      .timeline::before { left: 20px; transform: none; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .timeline-item.right .timeline-content,
+      .timeline-item.left .timeline-content { grid-column: 1; padding-left: 52px; padding-right: 0; text-align: left; }
+      .timeline-dot { left: 20px; transform: translateX(-50%); }
+      .join-inner { grid-template-columns: 1fr; }
+      .join-actions { flex-direction: row; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root { --nav-h: 60px; }
+      .nav-social { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .wrap { padding: 0 16px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="header">
+  <div class="wrap">
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="nav-mobile-btn" id="menuToggle" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-group">
+          <a href="/quienes-somos" class="active">Quiénes somos</a>
+          <a href="/cursos">Cursos</a>
+          <a href="/recursos">Recursos</a>
+          <a href="/premios">Premios</a>
+          <a href="/agenda">Agenda</a>
+        </div>
+      </div>
+      <a href="/" class="nav-logo">
+        <img src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+      </a>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="nav-group">
+          <a href="/actividades">Actividades</a>
+          <a href="/contacto">Contacto</a>
+          <a href="/login">Área socios</a>
+        </div>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a href="/asociate" class="btn btn-red">Únete</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <a href="/quienes-somos" style="color:#fff;font-weight:700;">Quiénes somos</a>
+    <a href="/cursos">Cursos</a>
+    <a href="/recursos">Recursos</a>
+    <a href="/premios">Premios</a>
+    <a href="/agenda">Agenda</a>
+    <a href="/actividades">Actividades</a>
+    <a href="/contacto">Contacto</a>
+    <a href="/login">Área socios</a>
+    <a href="/asociate" style="color:var(--accent);font-weight:700;">Únete →</a>
+    <div class="mobile-menu-social">
+      <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+      <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ PAGE HERO ════ -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-gradient"></div>
+  <div class="wrap page-hero-content">
+    <p class="page-hero-tag">La asociación</p>
+    <h1 class="page-hero-title">Quiénes<br>somos</h1>
+    <p class="page-hero-desc">La voz del montaje audiovisual en España: una comunidad de profesionales que trabaja para visibilizar, dignificar y fortalecer la figura del montador y la montadora.</p>
+  </div>
+</section>
+
+
+<!-- ════ STATS BAR ════ -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <div class="stat-num">+<span>300</span></div>
+        <p class="stat-label">Socios y socias</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>15</span></div>
+        <p class="stat-label">Años de trayectoria</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">+<span>80</span></div>
+        <p class="stat-label">Actividades realizadas</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span>1</span></div>
+        <p class="stat-label">Premio AMAE anual</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ ABOUT INTRO ════ -->
+<section class="about-intro">
+  <div class="wrap">
+    <div class="about-intro-grid">
+      <div>
+        <p class="about-intro-tag">Nuestra historia</p>
+        <h2 class="about-intro-title">Una asociación nacida desde adentro del oficio</h2>
+        <div class="about-intro-body">
+          <p>AMAE, la Asociación de Montadores Audiovisuales de España, nació de la necesidad de articular y visibilizar una profesión fundamental en el proceso creativo cinematográfico y televisivo que, históricamente, ha permanecido en la sombra.</p>
+          <p>Somos un colectivo de montadores y montadoras de cine, televisión, documental y publicidad que compartimos la convicción de que el montaje es el corazón narrativo de cualquier obra audiovisual. Desde nuestra fundación, trabajamos para que ese corazón lata con fuerza y reconocimiento.</p>
+          <p>Organizamos actividades formativas, foros de debate, proyecciones comentadas y encuentros entre profesionales, además de otorgar anualmente el Premio AMAE al mejor montaje del cine español.</p>
+        </div>
+        <div class="about-intro-cta">
+          <a href="/asociate" class="btn btn-red">Hazte socio/a</a>
+          <a href="/contacto" class="btn btn-ghost">Contáctanos</a>
+        </div>
+      </div>
+      <div class="about-img-wrap">
+        <img src="https://picsum.photos/seed/amae-team/800/600" alt="Equipo AMAE">
+        <div class="about-img-badge">
+          <div class="about-img-badge-icon"><i class="fa-solid fa-film"></i></div>
+          <div>
+            <div class="about-img-badge-num">2009</div>
+            <div class="about-img-badge-text">Año de fundación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ VALORES ════ -->
+<section class="values-section">
+  <div class="wrap">
+    <div class="section-header">
+      <p class="section-tag">Valores</p>
+      <h2 class="section-title">Lo que nos define</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-people-group"></i></div>
+        <h3 class="value-title">Comunidad</h3>
+        <p class="value-text">Creemos en la fuerza del colectivo. Construimos un espacio donde los profesionales del montaje se reconocen, apoyan y crecen juntos, independientemente de su experiencia o especialidad.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3 class="value-title">Formación</h3>
+        <p class="value-text">El aprendizaje continuo es parte del oficio. Promovemos el intercambio de conocimiento entre profesionales, tanto en técnica como en narrativa, a través de cursos, masterclasses y coloquios.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-eye"></i></div>
+        <h3 class="value-title">Visibilidad</h3>
+        <p class="value-text">El montaje sigue siendo una profesión invisible para el gran público. Trabajamos para que la figura del montador y la montadora sea reconocida como la que es: pieza esencial de la creación audiovisual.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-handshake"></i></div>
+        <h3 class="value-title">Representación</h3>
+        <p class="value-text">Somos la voz del sector ante instituciones, festivales e industria. Defendemos condiciones laborales dignas y el reconocimiento profesional de quienes montan cine y televisión en España.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <h3 class="value-title">Innovación</h3>
+        <p class="value-text">El audiovisual cambia constantemente. Fomentamos el debate sobre las nuevas herramientas, flujos de trabajo y lenguajes emergentes que están transformando la manera de montar.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+        <h3 class="value-title">Equidad</h3>
+        <p class="value-text">Impulsamos la igualdad en el sector audiovisual, trabajando activamente para que el montaje sea una profesión accesible, justa y diversa en todos sus niveles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ HISTORIA ════ -->
+<section class="history-section">
+  <div class="wrap">
+    <div class="section-header">
+      <p class="section-tag">Cronología</p>
+      <h2 class="section-title">Nuestra trayectoria</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item right">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <p class="timeline-year">2009</p>
+          <h3 class="timeline-title">Fundación de AMAE</h3>
+          <p class="timeline-text">Un grupo de montadores y montadoras decide formalize un colectivo que agrupe y represente a los profesionales del montaje audiovisual en España.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <p class="timeline-year">2012</p>
+          <h3 class="timeline-title">Primer Premio AMAE</h3>
+          <p class="timeline-text">Nace el Premio AMAE al mejor montaje del cine español, que hoy es el único galardón del sector cinematográfico dedicado específicamente a reconocer la labor del montaje.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item right">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <p class="timeline-year">2016</p>
+          <h3 class="timeline-title">Programa de formación</h3>
+          <p class="timeline-text">Se consolida el programa de actividades formativas con masterclasses, talleres y coloquios con montadores de referencia nacional e internacional.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <p class="timeline-year">2020</p>
+          <h3 class="timeline-title">AMAE en digital</h3>
+          <p class="timeline-text">La asociación adapta su actividad al entorno digital, ampliando el alcance de sus cursos y debates a profesionales de toda España y Latinoamérica.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item right">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <p class="timeline-year">2024</p>
+          <h3 class="timeline-title">+300 socios y socias</h3>
+          <p class="timeline-text">AMAE supera los 300 miembros, consolidándose como la mayor comunidad de montadores audiovisuales de habla hispana con presencia en festivales y eventos internacionales.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ EQUIPO / JUNTA ════ -->
+<section class="team-section">
+  <div class="wrap">
+    <div class="section-header">
+      <p class="section-tag">Junta directiva</p>
+      <h2 class="section-title">Quienes nos dirigen</h2>
+    </div>
+    <div class="team-grid">
+
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/team1/400/500" alt="Presidenta">
+        <div class="team-info">
+          <h3 class="team-name">Elena Martínez</h3>
+          <p class="team-role">Presidenta</p>
+          <p class="team-bio">Montadora con más de 20 años en cine y documental. Ha trabajado en producciones para TVE, Netflix y Movistar+.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/team2/400/500" alt="Vicepresidente">
+        <div class="team-info">
+          <h3 class="team-name">Carlos Borrego</h3>
+          <p class="team-role">Vicepresidente</p>
+          <p class="team-bio">Especialista en montaje publicitario y branded content. Consultor de marca personal para profesionales audiovisuales.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/team3/400/500" alt="Secretaria">
+        <div class="team-info">
+          <h3 class="team-name">Ana Ruiz</h3>
+          <p class="team-role">Secretaria</p>
+          <p class="team-bio">Montadora de series de televisión con amplia experiencia en ficción para plataformas nacionales e internacionales.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img class="team-photo" src="https://picsum.photos/seed/team4/400/500" alt="Tesorero">
+        <div class="team-info">
+          <h3 class="team-name">Javier Sánchez</h3>
+          <p class="team-role">Tesorero</p>
+          <p class="team-bio">Montador documental y formador. Ha impartido talleres de edición en escuelas de cine de Madrid y Barcelona.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ JOIN CTA ════ -->
+<section class="join-section">
+  <div class="wrap">
+    <div class="join-inner">
+      <div>
+        <p class="join-tag">Forma parte</p>
+        <h2 class="join-title">¿Eres montador o montadora<br>audiovisual en España?</h2>
+        <p class="join-desc">Únete a la comunidad de referencia del sector. Accede a formación, eventos, recursos exclusivos y forma parte de la voz que representa al montaje en la industria audiovisual española.</p>
+      </div>
+      <div class="join-actions">
+        <a href="/asociate" class="btn btn-red" style="white-space:nowrap;">Hazte socio/a</a>
+        <a href="/contacto" class="btn btn-ghost" style="white-space:nowrap;">Más información</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+        <p class="footer-nl-label">Newsletter</p>
+        <div class="footer-nl-form">
+          <input type="email" placeholder="tu@email.com" aria-label="Email">
+          <button type="button">Suscribirse</button>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Asociación</p>
+        <ul class="footer-links">
+          <li><a href="/quienes-somos">Quiénes somos</a></li>
+          <li><a href="/cursos">Cursos</a></li>
+          <li><a href="/recursos">Recursos</a></li>
+          <li><a href="/premios">Premios</a></li>
+          <li><a href="/agenda">Agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Más</p>
+        <ul class="footer-links">
+          <li><a href="/actividades">Actividades</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/login">Área socios</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Únete</p>
+        <p class="footer-join-text">Forma parte de la comunidad de montadores audiovisuales de España.</p>
+        <a href="/asociate" class="btn btn-red" style="width:100%;justify-content:center;">Hazte socio/a</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 AMAE — Asociación de Montadores Audiovisuales de España</span>
+      <div class="footer-legal">
+        <a href="/privacidad">Privacidad</a>
+        <a href="/aviso-legal">Aviso legal</a>
+        <a href="/cookies">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu   = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('menuOverlay');
+
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.innerHTML = open
+      ? '<i class="fa-solid fa-xmark"></i>'
+      : '<i class="fa-solid fa-bars"></i>';
+  });
+
+  overlay.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+    toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+  });
+</script>
+
+</body>
+</html>
