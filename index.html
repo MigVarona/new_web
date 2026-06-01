@@ -117,9 +117,24 @@
     .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
 
     /* ── Hero ── */
-    .hero { padding-top: var(--nav-h); background: var(--bg); }
+    .hero { padding-top: var(--nav-h); background: var(--bg); position: relative; }
     .hero-swiper { padding: 32px 0 40px !important; }
     .hero-swiper .swiper-slide { width: 280px; }
+
+    .hero-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 10; display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 0 12px; pointer-events: none;
+    }
+    .hero-nav button {
+      width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,.12); color: #fff; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+      transition: background var(--t), transform var(--t);
+      pointer-events: all;
+    }
+    .hero-nav button:hover { background: var(--accent); transform: scale(1.1); }
 
     .card {
       border-radius: var(--radius); overflow: hidden;
@@ -387,6 +402,10 @@
 
 <!-- ════ HERO CAROUSEL ════ -->
 <section class="hero">
+  <div class="hero-nav">
+    <button id="hp" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <button id="hn" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
   <div class="swiper hero-swiper" id="heroSwiper">
     <div class="swiper-wrapper">
 
@@ -914,6 +933,7 @@
     slidesPerView: 'auto',
     spaceBetween: 14,
     centeredSlides: true,
+    navigation: { prevEl: '#hp', nextEl: '#hn' },
   });
 
   new Swiper('#activSwiper', {
