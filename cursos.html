@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cursos – AMAE</title>
+
+  <link rel="icon" href="https://amae.pro/wp-content/uploads/2019/09/m-de-amae-e1687945093887.jpg" sizes="32x32">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:         #1c1c1c;
+      --bg-alt:     #242424;
+      --bg-dark:    #111111;
+      --accent:     #FF4A47;
+      --accent-h:   #e03c39;
+      --text:       #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --border:     rgba(255,255,255,0.09);
+      --font:       'Montserrat', sans-serif;
+      --nav-h:      68px;
+      --radius:     14px;
+      --t:          0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Header ── */
+    .header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--nav-h); background: rgba(24,24,24,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 16px; }
+    .nav-group { display: flex; align-items: center; gap: 2px; }
+    .nav-group a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 7px 11px; border-radius: 7px; letter-spacing: .02em; transition: color var(--t), background var(--t); }
+    .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-group a.active { color: #fff; font-weight: 700; }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
+    .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
+    .nav-social a { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); transition: color var(--t), background var(--t); }
+    .nav-social a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background var(--t), transform var(--t), box-shadow var(--t); }
+    .btn-red { background: var(--accent); color: #fff; }
+    .btn-red:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,74,71,.35); }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 6px; line-height: 1; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .mobile-menu-panel { position: absolute; top: var(--nav-h); left: 0; right: 0; z-index: 1; background: #1a1a1a; border-bottom: 1px solid var(--border); padding: 8px 0 20px; animation: slideDown .22s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+    .mobile-menu-panel a { display: block; padding: 12px 28px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); transition: color var(--t), background var(--t); }
+    .mobile-menu-panel a:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .mobile-menu-social { display: flex; gap: 8px; padding: 16px 28px 0; }
+    .mobile-menu-social a { width: 36px; height: 36px; border-radius: 8px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); border-bottom: none; }
+    .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── Page hero ── */
+    .page-hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 52px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .page-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .page-hero-title { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1; }
+    .page-hero-desc { margin-top: 14px; font-size: 15px; color: var(--text-muted); max-width: 540px; line-height: 1.75; }
+
+    /* ── Filters ── */
+    .filters-bar { display: flex; gap: 8px; flex-wrap: wrap; padding: 28px 0; }
+    .filter-btn { padding: 7px 18px; border-radius: 999px; border: 1.5px solid var(--border); background: transparent; color: var(--text-muted); font-family: var(--font); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; transition: all var(--t); }
+    .filter-btn:hover { border-color: rgba(255,255,255,.3); color: #fff; }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ── Courses grid ── */
+    .courses-section { padding: 0 0 80px; background: var(--bg); }
+    .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .course-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: border-color var(--t), transform var(--t), box-shadow var(--t); }
+    .course-card:hover { border-color: rgba(255,255,255,.2); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4); }
+    .course-card.hidden { display: none; }
+    .course-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .course-body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+    .course-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .course-tag { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 1px; }
+    .course-title { font-size: 16px; font-weight: 700; line-height: 1.45; color: #fff; flex: 1; margin-bottom: 18px; }
+    .course-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .course-meta span { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+    .course-meta i { font-size: 11px; }
+    .course-cta { align-self: flex-start; padding: 9px 20px; font-size: 12px; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+    .footer-logo { height: 38px; width: auto; margin-bottom: 28px; }
+    .footer-nl-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-nl-form { display: flex; gap: 8px; }
+    .footer-nl-form input { flex: 1; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 7px; padding: 10px 14px; color: #fff; font-family: var(--font); font-size: 13px; outline: none; transition: border-color var(--t); }
+    .footer-nl-form input:focus { border-color: rgba(255,255,255,.35); }
+    .footer-nl-form input::placeholder { color: rgba(255,255,255,.3); }
+    .footer-nl-form button { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 10px 18px; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; transition: background var(--t); white-space: nowrap; }
+    .footer-nl-form button:hover { background: var(--accent-h); }
+    .footer-social { display: flex; gap: 6px; margin-top: 20px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); color: var(--text-muted); transition: background var(--t), color var(--t); }
+    .footer-social a:hover { background: var(--accent); color: #fff; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,.6); transition: color var(--t); }
+    .footer-links a:hover { color: #fff; }
+    .footer-join-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,.3); transition: color var(--t); }
+    .footer-legal a:hover { color: rgba(255,255,255,.65); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1080px) { .nav-group { display: none; } .nav-mobile-btn { display: flex; } }
+    @media (max-width: 900px)  { .courses-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px)  { :root { --nav-h: 60px; } .nav-social { display: none; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px)  { .courses-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 480px)  { .wrap { padding: 0 16px; } .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="header">
+  <div class="wrap">
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="nav-mobile-btn" id="menuToggle" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-group">
+          <a href="/quienes-somos/">Quiénes somos</a>
+          <a href="/cursos/" class="active">Cursos</a>
+          <a href="/recursos/">Recursos</a>
+          <a href="/premios/">Premios</a>
+          <a href="/agenda/">Agenda</a>
+        </div>
+      </div>
+      <a href="/" class="nav-logo">
+        <img src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+      </a>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="nav-group">
+          <a href="/actividades/">Actividades</a>
+          <a href="/contacto/">Contacto</a>
+          <a href="/login/">Área socios</a>
+        </div>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a href="/asociate/" class="btn btn-red">Únete</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <a href="/quienes-somos/">Quiénes somos</a>
+    <a href="/cursos/" style="color:#fff;font-weight:700;">Cursos</a>
+    <a href="/recursos/">Recursos</a>
+    <a href="/premios/">Premios</a>
+    <a href="/agenda/">Agenda</a>
+    <a href="/actividades/">Actividades</a>
+    <a href="/contacto/">Contacto</a>
+    <a href="/login/">Área socios</a>
+    <a href="/asociate/" style="color:var(--accent);font-weight:700;">Únete →</a>
+    <div class="mobile-menu-social">
+      <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+      <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ PAGE HERO ════ -->
+<section class="page-hero">
+  <div class="wrap">
+    <p class="page-hero-tag">Formación</p>
+    <h1 class="page-hero-title">Cursos</h1>
+    <p class="page-hero-desc">Formación especializada en montaje audiovisual, postproducción y narrativa cinematográfica impartida por profesionales del sector.</p>
+  </div>
+</section>
+
+
+<!-- ════ CURSOS ════ -->
+<section class="courses-section">
+  <div class="wrap">
+
+    <div class="filters-bar">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="demo-reel">Demo reel</button>
+      <button class="filter-btn" data-filter="ayudantia">Ayudantía</button>
+      <button class="filter-btn" data-filter="davinci">DaVinci Resolve</button>
+      <button class="filter-btn" data-filter="ia">Inteligencia Artificial</button>
+      <button class="filter-btn" data-filter="narrativa">Narrativa</button>
+    </div>
+
+    <div class="courses-grid" id="coursesGrid">
+
+      <div class="course-card" data-cat="demo-reel">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso1/640/360" alt="Técnicas Demo reel">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">Demo reel</span></div>
+          <h2 class="course-title">Técnicas de Edición Demo Reel: Mejora tu marca personal</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> Carlos Borrego</span>
+            <span><i class="fa-regular fa-layer-group"></i> 2 partes</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="ayudantia">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso2/640/360" alt="Ayudante de Montaje">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">Ayudantía</span></div>
+          <h2 class="course-title">Resolución de dudas: Introducción al trabajo del ayudante de montaje</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> AMAE</span>
+            <span><i class="fa-regular fa-layer-group"></i> Módulo 1</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="davinci">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso3/640/360" alt="DaVinci Resolve">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">DaVinci</span><span class="course-tag">Postproducción</span></div>
+          <h2 class="course-title">Piérdele el miedo a DaVinci Resolve</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> Carlos Cañas</span>
+            <span><i class="fa-regular fa-layer-group"></i> Curso avanzado</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="ayudantia">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso4/640/360" alt="Ayudante de Montaje 2">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">Ayudantía</span></div>
+          <h2 class="course-title">Curso de Ayudante de Montaje — Módulo 1, Parte 1</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> AMAE</span>
+            <span><i class="fa-regular fa-layer-group"></i> Módulo 1</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="ia">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso5/640/360" alt="IA Profesionales del Vídeo">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">Inteligencia Artificial</span></div>
+          <h2 class="course-title">IA para Profesionales del Vídeo con Luis Zerón</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> Luis Zerón</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="ia narrativa">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso6/640/360" alt="IA Storytelling">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">Inteligencia Artificial</span><span class="course-tag">Narrativa</span></div>
+          <h2 class="course-title">Masterclass: La Inteligencia Artificial en el Storytelling</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> AMAE</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="narrativa">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso7/640/360" alt="Narrativas de Montaje">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">Narrativa</span></div>
+          <h2 class="course-title">Narrativas de Montaje: El Musical con Javi Frutos</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> Javi Frutos</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="davinci">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso8/640/360" alt="DaVinci Avanzado">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">DaVinci</span><span class="course-tag">Postproducción</span></div>
+          <h2 class="course-title">Curso Avanzado de DaVinci Resolve — Parte 2</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> Carlos Cañas</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="ayudantia">
+        <img class="course-thumb" src="https://picsum.photos/seed/curso9/640/360" alt="Edición Animación">
+        <div class="course-body">
+          <div class="course-tags"><span class="course-tag">Ayudantía</span></div>
+          <h2 class="course-title">Edición de Películas de Animación con Claudio Hernández</h2>
+          <div class="course-meta">
+            <span><i class="fa-regular fa-user"></i> Claudio Hernández</span>
+          </div>
+          <a href="#" class="btn btn-red course-cta">Ver curso</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+        <p class="footer-nl-label">Newsletter</p>
+        <div class="footer-nl-form">
+          <input type="email" placeholder="tu@email.com" aria-label="Email">
+          <button type="button">Suscribirse</button>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Asociación</p>
+        <ul class="footer-links">
+          <li><a href="/quienes-somos/">Quiénes somos</a></li>
+          <li><a href="/cursos/">Cursos</a></li>
+          <li><a href="/recursos/">Recursos</a></li>
+          <li><a href="/premios/">Premios</a></li>
+          <li><a href="/agenda/">Agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Más</p>
+        <ul class="footer-links">
+          <li><a href="/actividades/">Actividades</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+          <li><a href="/login/">Área socios</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Únete</p>
+        <p class="footer-join-text">Forma parte de la comunidad de montadores audiovisuales de España.</p>
+        <a href="/asociate/" class="btn btn-red" style="width:100%;justify-content:center;">Hazte socio/a</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© AMAE Asociación de Montadores Audiovisuales de España</p>
+      <nav class="footer-legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Política de cookies</a>
+        <a href="#">Privacidad</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  /* Course filters */
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      document.querySelectorAll('.course-card').forEach(function(card) {
+        card.classList.toggle('hidden', f !== 'all' && !card.dataset.cat.includes(f));
+      });
+    });
+  });
+
+  /* Mobile menu */
+  (function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    var overlay = document.getElementById('menuOverlay');
+    function close() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.querySelector('i').className = 'fa-solid fa-bars'; document.body.style.overflow = ''; }
+    btn.addEventListener('click', function () { var open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); btn.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; document.body.style.overflow = open ? 'hidden' : ''; });
+    overlay.addEventListener('click', close);
+    menu.querySelectorAll('.mobile-menu-panel a').forEach(function(a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
+
+</body>
+</html>
