@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Técnicas de Edición Demo Reel – AMAE</title>
+
+  <link rel="icon" href="https://amae.pro/wp-content/uploads/2019/09/m-de-amae-e1687945093887.jpg" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:         #1c1c1c;
+      --bg-alt:     #242424;
+      --bg-dark:    #111111;
+      --accent:     #FF4A47;
+      --accent-h:   #e03c39;
+      --text:       #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --border:     rgba(255,255,255,0.09);
+      --font:       'Montserrat', sans-serif;
+      --nav-h:      68px;
+      --radius:     14px;
+      --t:          0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Header ── */
+    .header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--nav-h); background: rgba(24,24,24,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 16px; }
+    .nav-group { display: flex; align-items: center; gap: 2px; }
+    .nav-group a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 7px 11px; border-radius: 7px; letter-spacing: .02em; transition: color var(--t), background var(--t); }
+    .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-group a.active { color: #fff; font-weight: 700; }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
+    .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
+    .nav-social a { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); transition: color var(--t), background var(--t); }
+    .nav-social a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background var(--t), transform var(--t), box-shadow var(--t); }
+    .btn-red { background: var(--accent); color: #fff; }
+    .btn-red:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,74,71,.35); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent); color: #fff; }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 6px; line-height: 1; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .mobile-menu-panel { position: absolute; top: var(--nav-h); left: 0; right: 0; z-index: 1; background: #1a1a1a; border-bottom: 1px solid var(--border); padding: 8px 0 20px; animation: slideDown .22s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+    .mobile-menu-panel a { display: block; padding: 12px 28px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); transition: color var(--t), background var(--t); }
+    .mobile-menu-panel a:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .mobile-menu-social { display: flex; gap: 8px; padding: 16px 28px 0; }
+    .mobile-menu-social a { width: 36px; height: 36px; border-radius: 8px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); border-bottom: none; }
+    .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── Hero del curso ── */
+    .course-hero {
+      margin-top: var(--nav-h);
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--border);
+      padding: 52px 0 56px;
+    }
+    .course-hero-inner { display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: center; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--text-muted); transition: color var(--t); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb i { font-size: 9px; }
+    .course-category {
+      display: inline-block; background: rgba(255,74,71,.15); color: var(--accent);
+      font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 6px; margin-bottom: 16px;
+    }
+    .course-hero-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900;
+      letter-spacing: -.02em; line-height: 1.1; margin-bottom: 16px;
+    }
+    .course-hero-desc { font-size: 15px; color: rgba(255,255,255,.72); line-height: 1.75; margin-bottom: 28px; max-width: 580px; }
+    .course-stats { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+    .course-stat { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .course-stat i { color: var(--accent); font-size: 12px; }
+    .course-stat strong { color: #fff; }
+    .instructor-mini { display: flex; align-items: center; gap: 10px; }
+    .instructor-mini img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
+    .instructor-mini span { font-size: 13px; color: var(--text-muted); }
+    .instructor-mini strong { color: #fff; }
+
+    /* Hero thumbnail */
+    .course-hero-thumb {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 16/9; cursor: pointer;
+    }
+    .course-hero-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .course-hero-thumb:hover img { transform: scale(1.03); }
+    .course-hero-thumb-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.45);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--t);
+    }
+    .course-hero-thumb:hover .course-hero-thumb-overlay { background: rgba(0,0,0,.35); }
+    .play-btn {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--accent); display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: #fff;
+      box-shadow: 0 0 0 12px rgba(255,74,71,.2);
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .course-hero-thumb:hover .play-btn { transform: scale(1.1); box-shadow: 0 0 0 16px rgba(255,74,71,.15); }
+    .thumb-label { position: absolute; bottom: 12px; left: 12px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+
+    /* ── Main layout ── */
+    .course-body { display: grid; grid-template-columns: 1fr 380px; gap: 56px; padding: 64px 0 80px; align-items: start; }
+
+    /* ── Content ── */
+    .content { min-width: 0; }
+    .content-block { margin-bottom: 48px; }
+    .content-block:last-child { margin-bottom: 0; }
+    .block-title { font-size: 18px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+
+    /* Aprenderás */
+    .learn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .learn-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(255,255,255,.8); line-height: 1.5; }
+    .learn-item i { color: var(--accent); font-size: 13px; margin-top: 2px; flex-shrink: 0; }
+
+    /* Descripción */
+    .desc-text { font-size: 15px; line-height: 1.85; color: rgba(255,255,255,.72); }
+    .desc-text p { margin-bottom: 18px; }
+    .desc-text p:last-child { margin-bottom: 0; }
+    .desc-text strong { color: #fff; font-weight: 600; }
+
+    /* Requisitos */
+    .req-list { display: flex; flex-direction: column; gap: 10px; }
+    .req-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(255,255,255,.75); }
+    .req-item i { color: rgba(255,255,255,.3); font-size: 6px; margin-top: 7px; flex-shrink: 0; }
+
+    /* Temario */
+    .module { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 10px; }
+    .module-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; cursor: pointer;
+      background: var(--bg-alt);
+      transition: background var(--t);
+      user-select: none;
+    }
+    .module-header:hover { background: rgba(255,255,255,.06); }
+    .module-header.open { background: rgba(255,74,71,.08); border-bottom: 1px solid var(--border); }
+    .module-left { display: flex; align-items: center; gap: 12px; }
+    .module-num { width: 28px; height: 28px; border-radius: 7px; background: rgba(255,74,71,.15); color: var(--accent); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .module-name { font-size: 14px; font-weight: 700; color: #fff; }
+    .module-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .module-chevron { color: var(--text-muted); font-size: 12px; transition: transform var(--t); }
+    .module-header.open .module-chevron { transform: rotate(180deg); color: var(--accent); }
+    .module-lessons { display: none; }
+    .module-lessons.open { display: block; }
+    .lesson {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px 12px 60px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      transition: background var(--t);
+    }
+    .lesson:last-child { border-bottom: none; }
+    .lesson:hover { background: rgba(255,255,255,.03); }
+    .lesson-left { display: flex; align-items: center; gap: 10px; }
+    .lesson-icon { width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,.05); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+    .lesson-title { font-size: 13px; color: rgba(255,255,255,.8); }
+    .lesson-badge { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: rgba(255,74,71,.12); padding: 2px 8px; border-radius: 4px; }
+    .lesson-dur { font-size: 12px; color: var(--text-muted); }
+
+    /* Instructor */
+    .instructor-card {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .instructor-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--border); }
+    .instructor-name { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+    .instructor-role { font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 12px; }
+    .instructor-bio { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.7; }
+
+    /* ── Sidebar ── */
+    .sidebar { position: sticky; top: calc(var(--nav-h) + 24px); display: flex; flex-direction: column; gap: 16px; }
+    .enroll-card {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .enroll-preview { position: relative; aspect-ratio: 16/9; background: #000; }
+    .enroll-preview img { width: 100%; height: 100%; object-fit: cover; opacity: .7; }
+    .enroll-preview-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .enroll-play { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; }
+    .enroll-body { padding: 24px; }
+    .enroll-price { font-size: 28px; font-weight: 900; margin-bottom: 4px; }
+    .enroll-price span { font-size: 14px; font-weight: 500; color: var(--accent); background: rgba(255,74,71,.12); padding: 2px 10px; border-radius: 5px; vertical-align: middle; margin-left: 8px; }
+    .enroll-note { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+    .enroll-cta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .enroll-cta .btn { width: 100%; justify-content: center; border-radius: 10px; padding: 13px; font-size: 13px; }
+    .enroll-includes { display: flex; flex-direction: column; gap: 9px; }
+    .enroll-include { display: flex; align-items: center; gap: 9px; font-size: 13px; color: rgba(255,255,255,.7); }
+    .enroll-include i { color: var(--accent); font-size: 12px; width: 16px; text-align: center; }
+
+    .details-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+    .details-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .detail-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 13px; }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { color: var(--text-muted); display: flex; align-items: center; gap: 7px; }
+    .detail-label i { font-size: 11px; color: rgba(255,255,255,.3); width: 14px; text-align: center; }
+    .detail-val { font-weight: 600; color: #fff; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+    .footer-logo { height: 38px; width: auto; margin-bottom: 28px; }
+    .footer-nl-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-nl-form { display: flex; gap: 8px; }
+    .footer-nl-form input { flex: 1; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 7px; padding: 10px 14px; color: #fff; font-family: var(--font); font-size: 13px; outline: none; transition: border-color var(--t); }
+    .footer-nl-form input:focus { border-color: rgba(255,255,255,.35); }
+    .footer-nl-form input::placeholder { color: rgba(255,255,255,.3); }
+    .footer-nl-form button { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 10px 18px; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; transition: background var(--t); white-space: nowrap; }
+    .footer-nl-form button:hover { background: var(--accent-h); }
+    .footer-social { display: flex; gap: 6px; margin-top: 20px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); color: var(--text-muted); transition: background var(--t), color var(--t); }
+    .footer-social a:hover { background: var(--accent); color: #fff; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,.6); transition: color var(--t); }
+    .footer-links a:hover { color: #fff; }
+    .footer-join-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,.3); transition: color var(--t); }
+    .footer-legal a:hover { color: rgba(255,255,255,.65); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1080px) { .nav-group { display: none; } .nav-mobile-btn { display: flex; } }
+    @media (max-width: 960px) {
+      .course-hero-inner { grid-template-columns: 1fr; }
+      .course-hero-thumb { max-width: 560px; }
+      .course-body { grid-template-columns: 1fr; gap: 40px; }
+      .sidebar { position: static; }
+      .learn-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      :root { --nav-h: 60px; }
+      .nav-social { display: none; }
+      .instructor-card { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .wrap { padding: 0 16px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="header">
+  <div class="wrap">
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="nav-mobile-btn" id="menuToggle" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-group">
+          <a href="/quienes-somos">Quiénes somos</a>
+          <a href="/cursos" class="active">Cursos</a>
+          <a href="/recursos">Recursos</a>
+          <a href="/premios">Premios</a>
+          <a href="/agenda">Agenda</a>
+        </div>
+      </div>
+      <a href="/" class="nav-logo">
+        <img src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+      </a>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="nav-group">
+          <a href="/actividades">Actividades</a>
+          <a href="/contacto">Contacto</a>
+          <a href="/login">Área socios</a>
+        </div>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a href="/asociate" class="btn btn-red">Únete</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <a href="/quienes-somos">Quiénes somos</a>
+    <a href="/cursos" style="color:#fff;font-weight:700;">Cursos</a>
+    <a href="/recursos">Recursos</a>
+    <a href="/premios">Premios</a>
+    <a href="/agenda">Agenda</a>
+    <a href="/actividades">Actividades</a>
+    <a href="/contacto">Contacto</a>
+    <a href="/login">Área socios</a>
+    <a href="/asociate" style="color:var(--accent);font-weight:700;">Únete →</a>
+    <div class="mobile-menu-social">
+      <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener"><i class="fa-brands fa-vimeo-v"></i></a>
+      <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ HERO ════ -->
+<section class="course-hero">
+  <div class="wrap">
+    <div class="course-hero-inner">
+
+      <div>
+        <div class="breadcrumb">
+          <a href="/">Inicio</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <a href="/cursos">Cursos</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span>Técnicas Demo Reel</span>
+        </div>
+        <span class="course-category">Demo reel</span>
+        <h1 class="course-hero-title">Técnicas de Edición Demo Reel:<br>Mejora tu marca personal</h1>
+        <p class="course-hero-desc">Aprende a construir un demo reel profesional que destaque tus mejores trabajos, comunique tu estilo y te diferencie en el sector audiovisual.</p>
+        <div class="course-stats">
+          <span class="course-stat"><i class="fa-solid fa-layer-group"></i> <strong>2</strong> partes</span>
+          <span class="course-stat"><i class="fa-regular fa-clock"></i> <strong>~3 h</strong> de contenido</span>
+          <span class="course-stat"><i class="fa-solid fa-signal"></i> Nivel <strong>intermedio</strong></span>
+          <span class="course-stat"><i class="fa-solid fa-globe"></i> <strong>Español</strong></span>
+        </div>
+        <div class="instructor-mini">
+          <img src="https://picsum.photos/seed/borrego/80/80" alt="Carlos Borrego">
+          <span>Impartido por <strong>Carlos Borrego</strong></span>
+        </div>
+      </div>
+
+      <div class="course-hero-thumb" id="heroThumb">
+        <img src="https://picsum.photos/seed/curso1/800/450" alt="Preview del curso">
+        <div class="course-hero-thumb-overlay">
+          <div class="play-btn"><i class="fa-solid fa-play" style="margin-left:3px;"></i></div>
+        </div>
+        <span class="thumb-label">Vista previa del curso</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ CUERPO ════ -->
+<div class="wrap">
+  <div class="course-body">
+
+    <!-- CONTENIDO -->
+    <div class="content">
+
+      <!-- Qué aprenderás -->
+      <div class="content-block">
+        <h2 class="block-title">¿Qué aprenderás?</h2>
+        <div class="learn-grid">
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Estructura narrativa de un demo reel efectivo</div>
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Selección y jerarquía de clips según el perfil profesional</div>
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Ritmo, timing y música en el montaje del reel</div>
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Técnicas de color y acabados para unificar el look</div>
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Errores más comunes y cómo evitarlos</div>
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Estrategia de distribución y plataformas</div>
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Marca personal: cómo comunicar tu identidad visual</div>
+          <div class="learn-item"><i class="fa-solid fa-check"></i> Adaptación del reel a diferentes sectores (cine, publicidad, TV)</div>
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div class="content-block">
+        <h2 class="block-title">Descripción del curso</h2>
+        <div class="desc-text">
+          <p>Un <strong>demo reel</strong> no es solo una selección de tus mejores planos: es tu carta de presentación, tu voz como montador/a y la primera impresión que tendrá un director, productor o agencia de ti. En este curso, Carlos Borrego desglosa el proceso completo de construcción de un reel profesional desde cero.</p>
+          <p>A lo largo de las dos partes del curso, trabajaremos sobre casos reales, analizaremos reels que funcionan (y los que no), y exploraremos los principios que hacen que un demo reel quede grabado en la memoria de quien lo ve. No importa si llevas años en el sector o si estás empezando: cada montador/a necesita revisar y actualizar su reel periódicamente, y este curso te dará las herramientas para hacerlo con criterio.</p>
+          <p>El curso combina teoría con ejercicios prácticos. Al final tendrás un método claro y replicable para construir y actualizar tu demo reel en cualquier momento de tu carrera.</p>
+        </div>
+      </div>
+
+      <!-- Temario -->
+      <div class="content-block">
+        <h2 class="block-title">Temario</h2>
+
+        <div class="module">
+          <div class="module-header open" data-module="1">
+            <div class="module-left">
+              <span class="module-num">1</span>
+              <div>
+                <p class="module-name">Parte 1 — Fundamentos del Demo Reel</p>
+                <p class="module-meta">7 lecciones · 1 h 28 min</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-down module-chevron"></i>
+          </div>
+          <div class="module-lessons open" id="lessons-1">
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Introducción: qué es y qué no es un demo reel</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="lesson-badge">Gratis</span>
+                <span class="lesson-dur">8 min</span>
+              </div>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Análisis de reels que funcionan</span>
+              </div>
+              <span class="lesson-dur">14 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Selección de material: qué incluir y qué descartar</span>
+              </div>
+              <span class="lesson-dur">18 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Estructura narrativa del reel</span>
+              </div>
+              <span class="lesson-dur">22 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">El papel de la música y el ritmo</span>
+              </div>
+              <span class="lesson-dur">16 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Duración ideal y criterios de edición</span>
+              </div>
+              <span class="lesson-dur">12 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Ejercicio práctico: primer borrador de tu reel</span>
+              </div>
+              <span class="lesson-dur">18 min</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="module">
+          <div class="module-header" data-module="2">
+            <div class="module-left">
+              <span class="module-num">2</span>
+              <div>
+                <p class="module-name">Parte 2 — Marca personal y estrategia de distribución</p>
+                <p class="module-meta">6 lecciones · 1 h 35 min</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-down module-chevron"></i>
+          </div>
+          <div class="module-lessons" id="lessons-2">
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Identidad visual: color, tipografía y ritmo como marca</span>
+              </div>
+              <span class="lesson-dur">20 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Acabados de color y LUTs para unificar el look</span>
+              </div>
+              <span class="lesson-dur">24 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Diferentes reels para diferentes perfiles (ficción, publicidad, doc)</span>
+              </div>
+              <span class="lesson-dur">18 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Plataformas y formatos de entrega</span>
+              </div>
+              <span class="lesson-dur">14 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Errores frecuentes y cómo corregirlos</span>
+              </div>
+              <span class="lesson-dur">11 min</span>
+            </div>
+            <div class="lesson">
+              <div class="lesson-left">
+                <div class="lesson-icon"><i class="fa-solid fa-play"></i></div>
+                <span class="lesson-title">Ejercicio final: versión definitiva y revisión con Carlos</span>
+              </div>
+              <span class="lesson-dur">28 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Requisitos -->
+      <div class="content-block">
+        <h2 class="block-title">Requisitos</h2>
+        <ul class="req-list">
+          <li class="req-item"><i class="fa-solid fa-circle"></i> Conocimientos básicos de cualquier software de edición (Premiere, Final Cut, Resolve…)</li>
+          <li class="req-item"><i class="fa-solid fa-circle"></i> Material propio editado para seleccionar (al menos un proyecto terminado)</li>
+          <li class="req-item"><i class="fa-solid fa-circle"></i> No es necesaria experiencia previa en construcción de reels</li>
+        </ul>
+      </div>
+
+      <!-- Instructor -->
+      <div class="content-block">
+        <h2 class="block-title">El instructor</h2>
+        <div class="instructor-card">
+          <img class="instructor-avatar" src="https://picsum.photos/seed/borrego/160/160" alt="Carlos Borrego">
+          <div>
+            <h3 class="instructor-name">Carlos Borrego</h3>
+            <p class="instructor-role">Montador audiovisual · Consultor de marca personal</p>
+            <p class="instructor-bio">Montador con más de 15 años de experiencia en cine, publicidad y contenido digital. Ha trabajado para marcas como RTVE, Movistar+ y diversas productoras independientes. Miembro fundador de AMAE y referente en España en estrategias de marca personal para profesionales de la postproducción.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="enroll-card">
+        <div class="enroll-preview">
+          <img src="https://picsum.photos/seed/curso1/640/360" alt="">
+          <div class="enroll-preview-overlay">
+            <div class="enroll-play"><i class="fa-solid fa-play" style="margin-left:2px;"></i></div>
+          </div>
+        </div>
+        <div class="enroll-body">
+          <p class="enroll-price">Gratis <span>Para socios</span></p>
+          <p class="enroll-note">Acceso libre para socios/as de AMAE. No socios: consultar disponibilidad.</p>
+          <div class="enroll-cta">
+            <a href="/login" class="btn btn-red">Acceder al curso</a>
+            <a href="/asociate" class="btn btn-outline">Hazte socio/a</a>
+          </div>
+          <div class="enroll-includes">
+            <div class="enroll-include"><i class="fa-solid fa-play-circle"></i> ~3 horas de vídeo</div>
+            <div class="enroll-include"><i class="fa-solid fa-layer-group"></i> 2 partes · 13 lecciones</div>
+            <div class="enroll-include"><i class="fa-solid fa-infinity"></i> Acceso de por vida</div>
+            <div class="enroll-include"><i class="fa-solid fa-mobile-screen"></i> Disponible en móvil y escritorio</div>
+            <div class="enroll-include"><i class="fa-solid fa-certificate"></i> Certificado de finalización</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="details-card">
+        <p class="details-title">Detalles del curso</p>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fa-solid fa-signal"></i> Nivel</span>
+          <span class="detail-val">Intermedio</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fa-regular fa-clock"></i> Duración total</span>
+          <span class="detail-val">~3 horas</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fa-solid fa-layer-group"></i> Partes</span>
+          <span class="detail-val">2</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fa-solid fa-film"></i> Lecciones</span>
+          <span class="detail-val">13</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fa-solid fa-globe"></i> Idioma</span>
+          <span class="detail-val">Español</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label"><i class="fa-solid fa-tag"></i> Categoría</span>
+          <span class="detail-val">Demo reel</span>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+        <p class="footer-nl-label">Newsletter</p>
+        <div class="footer-nl-form">
+          <input type="email" placeholder="tu@email.com" aria-label="Email">
+          <button type="button">Suscribirse</button>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Asociación</p>
+        <ul class="footer-links">
+          <li><a href="/quienes-somos">Quiénes somos</a></li>
+          <li><a href="/cursos">Cursos</a></li>
+          <li><a href="/recursos">Recursos</a></li>
+          <li><a href="/premios">Premios</a></li>
+          <li><a href="/agenda">Agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Más</p>
+        <ul class="footer-links">
+          <li><a href="/actividades">Actividades</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/login">Área socios</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Únete</p>
+        <p class="footer-join-text">Forma parte de la comunidad de montadores audiovisuales de España.</p>
+        <a href="/asociate" class="btn btn-red" style="width:100%;justify-content:center;">Hazte socio/a</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© AMAE Asociación de Montadores Audiovisuales de España</p>
+      <nav class="footer-legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Política de cookies</a>
+        <a href="#">Privacidad</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  /* Accordion temario */
+  document.querySelectorAll('.module-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      var id = 'lessons-' + header.dataset.module;
+      var lessons = document.getElementById(id);
+      var isOpen = header.classList.contains('open');
+      header.classList.toggle('open', !isOpen);
+      lessons.classList.toggle('open', !isOpen);
+    });
+  });
+
+  /* Mobile menu */
+  (function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    var overlay = document.getElementById('menuOverlay');
+    function close() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.querySelector('i').className = 'fa-solid fa-bars'; document.body.style.overflow = ''; }
+    btn.addEventListener('click', function () { var open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); btn.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; document.body.style.overflow = open ? 'hidden' : ''; });
+    overlay.addEventListener('click', close);
+    menu.querySelectorAll('.mobile-menu-panel a').forEach(function(a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
+
+</body>
+</html>
