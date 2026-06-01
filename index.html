@@ -60,7 +60,8 @@
       transition: color var(--t), background var(--t);
     }
     .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
-    .nav-logo img { height: 32px; width: auto; }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
     .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
     .nav-social a {
       width: 32px; height: 32px; border-radius: 7px;
