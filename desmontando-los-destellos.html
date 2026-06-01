@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desmontando "Los destellos" – AMAE</title>
+
+  <link rel="icon" href="https://amae.pro/wp-content/uploads/2019/09/m-de-amae-e1687945093887.jpg" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:         #1c1c1c;
+      --bg-alt:     #242424;
+      --bg-dark:    #111111;
+      --accent:     #FF4A47;
+      --accent-h:   #e03c39;
+      --text:       #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --border:     rgba(255,255,255,0.09);
+      --font:       'Montserrat', sans-serif;
+      --nav-h:      68px;
+      --radius:     14px;
+      --t:          0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Header ── */
+    .header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--nav-h); background: rgba(24,24,24,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 16px; }
+    .nav-group { display: flex; align-items: center; gap: 2px; }
+    .nav-group a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 7px 11px; border-radius: 7px; letter-spacing: .02em; transition: color var(--t), background var(--t); }
+    .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
+    .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
+    .nav-social a { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); transition: color var(--t), background var(--t); }
+    .nav-social a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background var(--t), transform var(--t), box-shadow var(--t); }
+    .btn-red { background: var(--accent); color: #fff; }
+    .btn-red:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,74,71,.35); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent); color: #fff; }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 6px; line-height: 1; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .mobile-menu-panel { position: absolute; top: var(--nav-h); left: 0; right: 0; z-index: 1; background: #1a1a1a; border-bottom: 1px solid var(--border); padding: 8px 0 20px; animation: slideDown .22s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+    .mobile-menu-panel a { display: block; padding: 12px 28px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); transition: color var(--t), background var(--t); }
+    .mobile-menu-panel a:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .mobile-menu-social { display: flex; gap: 8px; padding: 16px 28px 0; }
+    .mobile-menu-social a { width: 36px; height: 36px; border-radius: 8px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); border-bottom: none; }
+    .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── Hero ── */
+    .hero-post {
+      margin-top: var(--nav-h);
+      position: relative;
+      height: 72vh; min-height: 480px; max-height: 680px;
+      overflow: hidden;
+    }
+    .hero-post-img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(.55);
+      transform: scale(1.04);
+    }
+    .hero-post-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.3) 55%, transparent 100%);
+    }
+    .hero-post-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 48px 0;
+    }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--text-muted); transition: color var(--t); }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb i { font-size: 9px; }
+    .post-tag-hero {
+      display: inline-block; background: var(--accent); color: #fff;
+      font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 6px; margin-bottom: 16px;
+    }
+    .hero-post-title {
+      font-size: clamp(2rem, 4.5vw, 3.6rem); font-weight: 900;
+      letter-spacing: -.02em; text-transform: uppercase; line-height: 1.05;
+      max-width: 760px; margin-bottom: 20px;
+    }
+    .hero-post-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .hero-post-meta span { font-size: 13px; color: rgba(255,255,255,.65); display: flex; align-items: center; gap: 6px; }
+    .hero-post-meta i { font-size: 12px; color: var(--accent); }
+
+    /* ── Layout ── */
+    .post-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 56px;
+      padding: 64px 0 80px;
+      align-items: start;
+    }
+
+    /* ── Main content ── */
+    .post-body { min-width: 0; }
+    .post-lead {
+      font-size: 18px; font-weight: 400; line-height: 1.8;
+      color: rgba(255,255,255,.8); margin-bottom: 36px;
+      border-left: 3px solid var(--accent); padding-left: 20px;
+    }
+    .post-text { font-size: 15px; line-height: 1.85; color: rgba(255,255,255,.72); }
+    .post-text p { margin-bottom: 22px; }
+    .post-text p:last-child { margin-bottom: 0; }
+    .post-text strong { color: #fff; font-weight: 600; }
+
+    .post-video {
+      margin: 40px 0;
+      border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+    .post-video iframe { width: 100%; height: 100%; display: block; border: none; }
+
+    .post-quote {
+      margin: 40px 0; padding: 28px 32px;
+      background: rgba(255,74,71,.08); border: 1px solid rgba(255,74,71,.2);
+      border-left: 4px solid var(--accent); border-radius: var(--radius);
+    }
+    .post-quote p { font-size: 17px; font-style: italic; color: rgba(255,255,255,.85); line-height: 1.7; margin: 0; }
+    .post-quote cite { display: block; margin-top: 12px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); font-style: normal; }
+
+    .post-gallery {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      margin: 40px 0;
+    }
+    .post-gallery img { border-radius: 10px; aspect-ratio: 16/9; object-fit: cover; width: 100%; }
+
+    .post-share { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .post-share-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .post-share-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 18px; border-radius: 999px; border: 1.5px solid var(--border);
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      transition: all var(--t); cursor: pointer; background: none; font-family: var(--font);
+    }
+    .share-btn:hover { border-color: rgba(255,255,255,.35); color: #fff; }
+    .share-btn i { font-size: 13px; }
+
+    /* ── Sidebar ── */
+    .post-sidebar { position: sticky; top: calc(var(--nav-h) + 24px); }
+    .sidebar-card {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; margin-bottom: 20px;
+    }
+    .sidebar-card-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .sidebar-info-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .sidebar-info-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .sidebar-info-row i { color: var(--accent); font-size: 14px; margin-top: 2px; flex-shrink: 0; width: 18px; text-align: center; }
+    .sidebar-info-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+    .sidebar-info-val { font-size: 13px; font-weight: 500; color: #fff; line-height: 1.4; }
+
+    .sidebar-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sidebar-tag {
+      padding: 5px 12px; border-radius: 999px; border: 1px solid var(--border);
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      transition: all var(--t);
+    }
+    .sidebar-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    .sidebar-cta { display: flex; flex-direction: column; gap: 10px; }
+    .sidebar-cta .btn { width: 100%; justify-content: center; }
+
+    /* ── Related ── */
+    .related { padding: 64px 0; background: var(--bg-alt); border-top: 1px solid var(--border); }
+    .related-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }
+    .sec-tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .sec-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1.05; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .rcard { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color var(--t), transform var(--t); }
+    .rcard:hover { border-color: rgba(255,255,255,.2); transform: translateY(-3px); }
+    .rcard-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .rcard-body { padding: 16px 18px 18px; }
+    .rcard-tag { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .rcard-title { font-size: 14px; font-weight: 600; line-height: 1.4; color: #fff; margin-bottom: 14px; }
+    .rcard-link { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 5px; transition: gap var(--t); }
+    .rcard:hover .rcard-link { gap: 9px; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+    .footer-logo { height: 38px; width: auto; margin-bottom: 28px; }
+    .footer-nl-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-nl-form { display: flex; gap: 8px; }
+    .footer-nl-form input { flex: 1; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 7px; padding: 10px 14px; color: #fff; font-family: var(--font); font-size: 13px; outline: none; transition: border-color var(--t); }
+    .footer-nl-form input:focus { border-color: rgba(255,255,255,.35); }
+    .footer-nl-form input::placeholder { color: rgba(255,255,255,.3); }
+    .footer-nl-form button { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 10px 18px; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; transition: background var(--t); white-space: nowrap; }
+    .footer-nl-form button:hover { background: var(--accent-h); }
+    .footer-social { display: flex; gap: 6px; margin-top: 20px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); color: var(--text-muted); transition: background var(--t), color var(--t); }
+    .footer-social a:hover { background: var(--accent); color: #fff; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,.6); transition: color var(--t); }
+    .footer-links a:hover { color: #fff; }
+    .footer-join-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,.3); transition: color var(--t); }
+    .footer-legal a:hover { color: rgba(255,255,255,.65); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1080px) { .nav-group { display: none; } .nav-mobile-btn { display: flex; } }
+    @media (max-width: 960px) {
+      .post-layout { grid-template-columns: 1fr; gap: 40px; }
+      .post-sidebar { position: static; }
+      .related-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root { --nav-h: 60px; }
+      .nav-social { display: none; }
+      .hero-post { height: 60vh; }
+      .hero-post-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+      .post-gallery { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .related-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 480px) { .wrap { padding: 0 16px; } }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="header">
+  <div class="wrap">
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="nav-mobile-btn" id="menuToggle" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-group">
+          <a href="/quienes-somos/">Quiénes somos</a>
+          <a href="/cursos/">Cursos</a>
+          <a href="/recursos/">Recursos</a>
+          <a href="/premios/">Premios</a>
+          <a href="/agenda/">Agenda</a>
+        </div>
+      </div>
+      <a href="/" class="nav-logo">
+        <img src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+      </a>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="nav-group">
+          <a href="/actividades/">Actividades</a>
+          <a href="/contacto/">Contacto</a>
+          <a href="/login/">Área socios</a>
+        </div>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a href="/asociate/" class="btn btn-red">Únete</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <a href="/quienes-somos/">Quiénes somos</a>
+    <a href="/cursos/">Cursos</a>
+    <a href="/recursos/">Recursos</a>
+    <a href="/premios/">Premios</a>
+    <a href="/agenda/">Agenda</a>
+    <a href="/actividades/">Actividades</a>
+    <a href="/contacto/">Contacto</a>
+    <a href="/login/">Área socios</a>
+    <a href="/asociate/" style="color:var(--accent);font-weight:700;">Únete →</a>
+    <div class="mobile-menu-social">
+      <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+      <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ HERO ════ -->
+<div class="hero-post">
+  <img class="hero-post-img" src="https://picsum.photos/seed/destellos/1600/900" alt="Los destellos">
+  <div class="hero-post-overlay"></div>
+  <div class="hero-post-content">
+    <div class="wrap">
+      <div class="breadcrumb">
+        <a href="/">Inicio</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <a href="/actividades/">Actividades</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Desmontando "Los destellos"</span>
+      </div>
+      <span class="post-tag-hero">Actividades</span>
+      <h1 class="hero-post-title">Desmontando<br>"Los destellos"</h1>
+      <div class="hero-post-meta">
+        <span><i class="fa-regular fa-calendar"></i> 24 de febrero de 2026</span>
+        <span><i class="fa-solid fa-location-dot"></i> Cine Doré, Madrid</span>
+        <span><i class="fa-regular fa-clock"></i> 19:00 h</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ CONTENIDO ════ -->
+<div class="wrap">
+  <div class="post-layout">
+
+    <!-- MAIN -->
+    <article class="post-body">
+
+      <p class="post-lead">
+        Una sesión única de análisis del montaje de <strong>Los destellos</strong>, la película de Pilar Palomero, de la mano de su montadora. Un espacio de conversación y aprendizaje para profesionales y amantes del cine.
+      </p>
+
+      <div class="post-text">
+        <p>
+          La serie <strong>Desmontando</strong> de AMAE nace con la vocación de abrir el proceso creativo del montaje al público y a los propios profesionales del sector. En cada sesión, el o la montadora de una película reciente se sienta a conversar con nosotros para desvelar las decisiones narrativas, emocionales y técnicas que dan forma a la obra.
+        </p>
+        <p>
+          En esta ocasión nos centramos en <strong>"Los destellos"</strong> (2025), la última película de Pilar Palomero. Una historia íntima y luminosa que explora la memoria y el tiempo a través de una mirada profundamente femenina. El montaje, pieza clave para sostener el tono poético del film, es el protagonista de esta noche.
+        </p>
+      </div>
+
+      <div class="post-video">
+        <iframe src="https://www.youtube-nocookie.com/embed/vpqfRdUSaFU"
+          title="Desmontando Los destellos"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+
+      <div class="post-text">
+        <p>
+          La sesión incluirá una proyección de fragmentos clave de la película seguida de un coloquio abierto. La montadora explicará en detalle su proceso de trabajo, desde la primera lectura del guion hasta la sala de mezclas, pasando por las decisiones más difíciles del montaje.
+        </p>
+        <p>
+          Se abordarán temas como el ritmo interno de las escenas, la relación entre montaje y música original, el uso del silencio como recurso narrativo y los momentos en los que la película encontró su verdadera forma durante el proceso de edición.
+        </p>
+      </div>
+
+      <blockquote class="post-quote">
+        <p>"El montaje no es solo unir planos, es construir el tiempo emocional del espectador. Cada corte es una decisión sobre lo que se siente y cuándo."</p>
+        <cite>— La montadora de "Los destellos"</cite>
+      </blockquote>
+
+      <div class="post-text">
+        <p>
+          El evento es <strong>abierto al público</strong>, aunque el aforo es limitado. Los socios y socias de AMAE tienen acceso preferente y reserva garantizada. Si aún no formas parte de la asociación, este es un buen momento para unirte.
+        </p>
+        <p>
+          Después de la sesión habrá un espacio informal de networking donde los asistentes podrán seguir conversando con los ponentes. Se servirán bebidas.
+        </p>
+      </div>
+
+      <div class="post-gallery">
+        <img src="https://picsum.photos/seed/gallery1/800/450" alt="">
+        <img src="https://picsum.photos/seed/gallery2/800/450" alt="">
+        <img src="https://picsum.photos/seed/gallery3/800/450" alt="">
+        <img src="https://picsum.photos/seed/gallery4/800/450" alt="">
+      </div>
+
+      <div class="post-share">
+        <p class="post-share-label">Compartir</p>
+        <div class="post-share-btns">
+          <button class="share-btn"><i class="fa-brands fa-x-twitter"></i> Twitter / X</button>
+          <button class="share-btn"><i class="fa-brands fa-facebook"></i> Facebook</button>
+          <button class="share-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+          <button class="share-btn"><i class="fa-solid fa-link"></i> Copiar enlace</button>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="post-sidebar">
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Detalles del evento</p>
+        <div class="sidebar-info-row">
+          <i class="fa-regular fa-calendar"></i>
+          <div>
+            <p class="sidebar-info-label">Fecha</p>
+            <p class="sidebar-info-val">24 de febrero de 2026</p>
+          </div>
+        </div>
+        <div class="sidebar-info-row">
+          <i class="fa-regular fa-clock"></i>
+          <div>
+            <p class="sidebar-info-label">Hora</p>
+            <p class="sidebar-info-val">19:00 – 21:30 h</p>
+          </div>
+        </div>
+        <div class="sidebar-info-row">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <p class="sidebar-info-label">Lugar</p>
+            <p class="sidebar-info-val">Cine Doré<br>C/ Santa Isabel 3, Madrid</p>
+          </div>
+        </div>
+        <div class="sidebar-info-row">
+          <i class="fa-solid fa-ticket"></i>
+          <div>
+            <p class="sidebar-info-label">Entrada</p>
+            <p class="sidebar-info-val">Gratuita · Aforo limitado</p>
+          </div>
+        </div>
+        <div class="sidebar-info-row">
+          <i class="fa-solid fa-users"></i>
+          <div>
+            <p class="sidebar-info-label">Acceso preferente</p>
+            <p class="sidebar-info-val">Socios/as AMAE</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Registro</p>
+        <div class="sidebar-cta">
+          <a href="/registro/" class="btn btn-red">Reservar plaza</a>
+          <a href="/asociate/" class="btn btn-outline">Hazte socio/a</a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Etiquetas</p>
+        <div class="sidebar-tags">
+          <span class="sidebar-tag">Montaje</span>
+          <span class="sidebar-tag">Cine español</span>
+          <span class="sidebar-tag">Ficción</span>
+          <span class="sidebar-tag">Coloquio</span>
+          <span class="sidebar-tag">Desmontando</span>
+          <span class="sidebar-tag">Madrid</span>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+
+<!-- ════ RELACIONADOS ════ -->
+<section class="related">
+  <div class="wrap">
+    <div class="related-header">
+      <div>
+        <p class="sec-tag">Más actividades</p>
+        <h2 class="sec-title">También te puede interesar</h2>
+      </div>
+      <a href="/actividades/" class="btn btn-outline" style="white-space:nowrap;">Ver todas</a>
+    </div>
+    <div class="related-grid">
+
+      <a href="#" class="rcard">
+        <img class="rcard-img" src="https://picsum.photos/seed/subsuelo/640/360" alt="Subsuelo">
+        <div class="rcard-body">
+          <p class="rcard-tag">Actividades</p>
+          <h3 class="rcard-title">Desmontando "Subsuelo"</h3>
+          <span class="rcard-link">Ver más <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="rcard">
+        <img class="rcard-img" src="https://picsum.photos/seed/muylejos/640/360" alt="Muy lejos">
+        <div class="rcard-body">
+          <p class="rcard-tag">Actividades</p>
+          <h3 class="rcard-title">Desmontando "Muy lejos"</h3>
+          <span class="rcard-link">Ver más <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="#" class="rcard">
+        <img class="rcard-img" src="https://picsum.photos/seed/thecore/640/360" alt="Jornadas THE CORE">
+        <div class="rcard-body">
+          <p class="rcard-tag">Jornadas</p>
+          <h3 class="rcard-title">Jornadas AMAE · THE CORE</h3>
+          <span class="rcard-link">Ver más <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+        <p class="footer-nl-label">Newsletter</p>
+        <div class="footer-nl-form">
+          <input type="email" placeholder="tu@email.com" aria-label="Email">
+          <button type="button">Suscribirse</button>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Asociación</p>
+        <ul class="footer-links">
+          <li><a href="/quienes-somos/">Quiénes somos</a></li>
+          <li><a href="/cursos/">Cursos</a></li>
+          <li><a href="/recursos/">Recursos</a></li>
+          <li><a href="/premios/">Premios</a></li>
+          <li><a href="/agenda/">Agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Más</p>
+        <ul class="footer-links">
+          <li><a href="/actividades/">Actividades</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+          <li><a href="/login/">Área socios</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Únete</p>
+        <p class="footer-join-text">Forma parte de la comunidad de montadores audiovisuales de España.</p>
+        <a href="/asociate/" class="btn btn-red" style="width:100%;justify-content:center;">Hazte socio/a</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© AMAE Asociación de Montadores Audiovisuales de España</p>
+      <nav class="footer-legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Política de cookies</a>
+        <a href="#">Privacidad</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  /* Share buttons */
+  document.querySelector('[data-share="copy"]')?.addEventListener('click', function() {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+      this.textContent = '¡Copiado!';
+    }.bind(this));
+  });
+  document.querySelectorAll('.share-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var icon = btn.querySelector('i');
+      var url = encodeURIComponent(window.location.href);
+      var text = encodeURIComponent(document.title);
+      if (icon.classList.contains('fa-x-twitter')) window.open('https://twitter.com/intent/tweet?url=' + url + '&text=' + text, '_blank');
+      if (icon.classList.contains('fa-facebook')) window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+      if (icon.classList.contains('fa-whatsapp')) window.open('https://wa.me/?text=' + text + '%20' + url, '_blank');
+      if (icon.classList.contains('fa-link')) {
+        navigator.clipboard.writeText(window.location.href);
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado';
+        setTimeout(function() { btn.innerHTML = '<i class="fa-solid fa-link"></i> Copiar enlace'; }, 2000);
+      }
+    });
+  });
+
+  /* Mobile menu */
+  (function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    var overlay = document.getElementById('menuOverlay');
+    function close() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.querySelector('i').className = 'fa-solid fa-bars'; document.body.style.overflow = ''; }
+    btn.addEventListener('click', function () { var open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); btn.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; document.body.style.overflow = open ? 'hidden' : ''; });
+    overlay.addEventListener('click', close);
+    menu.querySelectorAll('.mobile-menu-panel a').forEach(function(a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
+
+</body>
+</html>
