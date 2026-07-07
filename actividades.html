@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Actividades – AMAE</title>
+
+  <link rel="icon" href="https://amae.pro/wp-content/uploads/2019/09/m-de-amae-e1687945093887.jpg" sizes="32x32">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:         #1c1c1c;
+      --bg-alt:     #242424;
+      --bg-dark:    #111111;
+      --accent:     #FF4A47;
+      --accent-h:   #e03c39;
+      --text:       #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --border:     rgba(255,255,255,0.09);
+      --font:       'Montserrat', sans-serif;
+      --nav-h:      68px;
+      --radius:     14px;
+      --t:          0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Header ── */
+    .header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--nav-h); background: rgba(24,24,24,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 16px; }
+    .nav-group { display: flex; align-items: center; gap: 2px; }
+    .nav-group a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 7px 11px; border-radius: 7px; letter-spacing: .02em; transition: color var(--t), background var(--t); }
+    .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-group a.active { color: #fff; font-weight: 700; }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
+    .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
+    .nav-social a { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); transition: color var(--t), background var(--t); }
+    .nav-social a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background var(--t), transform var(--t), box-shadow var(--t); }
+    .btn-red { background: var(--accent); color: #fff; }
+    .btn-red:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,74,71,.35); }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 6px; line-height: 1; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .mobile-menu-panel { position: absolute; top: var(--nav-h); left: 0; right: 0; z-index: 1; background: #1a1a1a; border-bottom: 1px solid var(--border); padding: 8px 0 20px; animation: slideDown .22s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+    .mobile-menu-panel a { display: block; padding: 12px 28px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); transition: color var(--t), background var(--t); }
+    .mobile-menu-panel a:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .mobile-menu-social { display: flex; gap: 8px; padding: 16px 28px 0; }
+    .mobile-menu-social a { width: 36px; height: 36px; border-radius: 8px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); border-bottom: none; }
+    .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── Page hero ── */
+    .page-hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 52px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .page-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .page-hero-title { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1; }
+    .page-hero-desc { margin-top: 14px; font-size: 15px; color: var(--text-muted); max-width: 560px; line-height: 1.75; }
+
+    /* ── Activities ── */
+    .act-section { padding: 56px 0 96px; background: var(--bg); }
+
+    /* Filters */
+    .act-filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 44px; }
+    .act-filter { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text-muted); font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 9px 18px; border-radius: 999px; cursor: pointer; transition: color var(--t), background var(--t), border-color var(--t); }
+    .act-filter:hover { color: #fff; border-color: rgba(255,255,255,.2); }
+    .act-filter.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Group heading */
+    .act-group { margin-bottom: 72px; }
+    .act-group:last-child { margin-bottom: 0; }
+    .act-group.is-hidden { display: none; }
+    .act-group-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .act-group-tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+    .act-group-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1; }
+    .act-group-note { margin-left: auto; font-size: 12px; color: var(--text-muted); }
+
+    /* Activity list */
+    .act-list { display: flex; flex-direction: column; gap: 14px; }
+    .act-card { display: grid; grid-template-columns: 132px 78px 1fr auto; gap: 22px; align-items: center; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; transition: border-color var(--t), background var(--t), transform var(--t); }
+    .act-card:hover { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
+
+    .act-thumb { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: var(--bg-dark); }
+    .act-thumb img { width: 100%; height: 88px; object-fit: cover; }
+    .act-card[data-status="past"] .act-thumb img { filter: grayscale(.35) brightness(.9); }
+
+    .act-date { text-align: center; border-right: 1px solid var(--border); padding-right: 22px; }
+    .act-date-day { font-size: 30px; font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+    .act-date-mon { display: block; margin-top: 4px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+    .act-date-year { display: block; margin-top: 2px; font-size: 11px; color: var(--text-muted); }
+
+    .act-body { min-width: 0; }
+    .act-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .act-badge { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+    .act-badge.live { background: rgba(255,74,71,.15); color: #ff6b68; }
+    .act-badge.soon { background: rgba(90,200,120,.14); color: #6fdc8c; }
+    .act-badge.done { background: rgba(255,255,255,.08); color: var(--text-muted); }
+    .act-type { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+    .act-title { font-size: 18px; font-weight: 800; line-height: 1.25; }
+    .act-desc { margin-top: 6px; font-size: 13.5px; color: var(--text-muted); line-height: 1.65; max-width: 640px; }
+    .act-info { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 10px; }
+    .act-info span { font-size: 12px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; }
+    .act-info i { color: var(--accent); font-size: 11px; }
+
+    .act-action { display: flex; justify-content: flex-end; }
+    .act-link { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #fff; white-space: nowrap; padding: 10px 20px; border-radius: 999px; border: 1px solid var(--border); transition: background var(--t), border-color var(--t); }
+    .act-link:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.25); }
+    .act-link.primary { background: var(--accent); border-color: var(--accent); }
+    .act-link.primary:hover { background: var(--accent-h); border-color: var(--accent-h); }
+    .act-link.muted { color: var(--text-muted); cursor: default; }
+    .act-link.muted:hover { background: transparent; border-color: var(--border); }
+
+    .act-empty { display: none; text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 14px; }
+    .act-empty.show { display: block; }
+
+    /* ── CTA ── */
+    .cta-band { margin-top: 80px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .cta-title { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1.1; }
+    .cta-text { margin-top: 12px; max-width: 640px; font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+    .footer-logo { height: 38px; width: auto; margin-bottom: 28px; }
+    .footer-nl-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-nl-form { display: flex; gap: 8px; }
+    .footer-nl-form input { flex: 1; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 7px; padding: 10px 14px; color: #fff; font-family: var(--font); font-size: 13px; outline: none; transition: border-color var(--t); }
+    .footer-nl-form input:focus { border-color: rgba(255,255,255,.35); }
+    .footer-nl-form input::placeholder { color: rgba(255,255,255,.3); }
+    .footer-nl-form button { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 10px 18px; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; transition: background var(--t); white-space: nowrap; }
+    .footer-nl-form button:hover { background: var(--accent-h); }
+    .footer-social { display: flex; gap: 6px; margin-top: 20px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); color: var(--text-muted); transition: background var(--t), color var(--t); }
+    .footer-social a:hover { background: var(--accent); color: #fff; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,.6); transition: color var(--t); }
+    .footer-links a:hover { color: #fff; }
+    .footer-join-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,.3); transition: color var(--t); }
+    .footer-legal a:hover { color: rgba(255,255,255,.65); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1080px) { .nav-group { display: none; } .nav-mobile-btn { display: flex; } }
+    @media (max-width: 860px) {
+      .act-card { grid-template-columns: 108px 1fr; gap: 18px; }
+      .act-date { grid-row: 1; }
+      .act-date { display: flex; align-items: baseline; gap: 8px; text-align: left; border-right: none; padding: 0; }
+      .act-date-mon, .act-date-year { margin: 0; }
+      .act-thumb { grid-row: 2 / span 2; }
+      .act-thumb img { height: 100%; min-height: 96px; }
+      .act-body { grid-column: 2; }
+      .act-action { grid-column: 2; justify-content: flex-start; }
+      .cta-band { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px)  { :root { --nav-h: 60px; } .nav-social { display: none; } .footer-grid { grid-template-columns: 1fr 1fr; } .act-group-note { display: none; } }
+    @media (max-width: 560px)  {
+      .act-card { grid-template-columns: 1fr; }
+      .act-thumb { grid-row: auto; }
+      .act-thumb img { height: 150px; }
+      .act-body, .act-action { grid-column: 1; }
+      .act-date { border-bottom: 1px solid var(--border); padding: 0 0 14px; }
+      .act-action { padding-left: 0; }
+      .cta-band { padding: 28px; }
+    }
+    @media (max-width: 480px)  { .wrap { padding: 0 16px; } .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="header">
+  <div class="wrap">
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="nav-mobile-btn" id="menuToggle" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-group">
+          <a href="/quienes-somos">Quiénes somos</a>
+          <a href="/cursos">Cursos</a>
+          <a href="/recursos">Recursos</a>
+          <a href="/premios">Premios</a>
+          <a href="/agenda">Agenda</a>
+        </div>
+      </div>
+      <a href="/" class="nav-logo">
+        <img src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+      </a>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="nav-group">
+          <a href="/actividades" class="active">Actividades</a>
+          <a href="/contacto">Contacto</a>
+          <a href="/areadesocios">Área socios</a>
+        </div>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a href="/asociate" class="btn btn-red">Únete</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <a href="/quienes-somos">Quiénes somos</a>
+    <a href="/cursos">Cursos</a>
+    <a href="/recursos">Recursos</a>
+    <a href="/premios">Premios</a>
+    <a href="/agenda">Agenda</a>
+    <a href="/actividades" style="color:#fff;font-weight:700;">Actividades</a>
+    <a href="/contacto">Contacto</a>
+    <a href="/areadesocios">Área socios</a>
+    <a href="/asociate" style="color:var(--accent);font-weight:700;">Únete →</a>
+    <div class="mobile-menu-social">
+      <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+      <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ PAGE HERO ════ -->
+<section class="page-hero">
+  <div class="wrap">
+    <p class="page-hero-tag">Agenda &amp; Histórico</p>
+    <h1 class="page-hero-title">Actividades</h1>
+    <p class="page-hero-desc">Encuentros, proyecciones, masterclasses y mesas redondas de la Asociación de Montadores Audiovisuales de España. Aquí están las actividades en curso y próximas, junto al archivo de todo lo que ya hemos celebrado.</p>
+  </div>
+</section>
+
+
+<!-- ════ ACTIVIDADES ════ -->
+<section class="act-section">
+  <div class="wrap">
+
+    <!-- Filtros -->
+    <div class="act-filters" role="tablist" aria-label="Filtrar actividades">
+      <button class="act-filter active" data-filter="all">Todas</button>
+      <button class="act-filter" data-filter="upcoming">En curso y próximas</button>
+      <button class="act-filter" data-filter="past">Pasadas</button>
+    </div>
+
+    <!-- ══ ACTUALES Y PRÓXIMAS ══ -->
+    <div class="act-group" data-group="upcoming">
+      <div class="act-group-head">
+        <span class="act-group-tag">Ahora</span>
+        <h2 class="act-group-title">En curso y próximas</h2>
+        <span class="act-group-note">Actividades abiertas a inscripción</span>
+      </div>
+
+      <div class="act-list">
+
+        <article class="act-card" data-status="upcoming">
+          <figure class="act-thumb"><img src="assets/images/premios-amae-alta.jpg" alt="II Premios AMAE"></figure>
+          <div class="act-date">
+            <span class="act-date-day">01</span>
+            <span class="act-date-mon">Jun</span>
+            <span class="act-date-year">2026</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge live">En curso</span>
+              <span class="act-type">Convocatoria</span>
+            </div>
+            <h3 class="act-title">II Premios AMAE — Periodo de obras</h3>
+            <p class="act-desc">Abierta la ventana de obras estrenadas entre el 1 de julio de 2025 y el 30 de junio de 2026 de cara a la segunda edición de los Premios AMAE.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-calendar-days"></i> Hasta 30 jun 2026</span>
+              <span><i class="fa-solid fa-location-dot"></i> Ámbito nacional</span>
+              <span><i class="fa-solid fa-tag"></i> Residentes y nacionales</span>
+            </div>
+          </div>
+          <div class="act-action"><a href="/premios" class="act-link primary">Ver premios</a></div>
+        </article>
+
+        <article class="act-card" data-status="upcoming">
+          <figure class="act-thumb"><img src="assets/images/premios-amae-alta.jpg" alt="Masterclass de montaje"></figure>
+          <div class="act-date">
+            <span class="act-date-day">18</span>
+            <span class="act-date-mon">Jul</span>
+            <span class="act-date-year">2026</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge soon">Próxima</span>
+              <span class="act-type">Masterclass</span>
+            </div>
+            <h3 class="act-title">El ritmo invisible: montaje de secuencias de acción</h3>
+            <p class="act-desc">Sesión práctica sobre construcción del ritmo, continuidad y tensión en secuencias de acción, con análisis de casos y trabajo sobre timeline.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-clock"></i> 18:00 – 20:30</span>
+              <span><i class="fa-solid fa-location-dot"></i> Online</span>
+              <span><i class="fa-solid fa-user"></i> Socios/as AMAE</span>
+            </div>
+          </div>
+          <div class="act-action"><a href="/contacto" class="act-link primary">Inscribirse</a></div>
+        </article>
+
+        <article class="act-card" data-status="upcoming">
+          <figure class="act-thumb"><img src="assets/images/ganadores-ii-amae.jpeg" alt="Encuentro de montadores/as"></figure>
+          <div class="act-date">
+            <span class="act-date-day">26</span>
+            <span class="act-date-mon">Sep</span>
+            <span class="act-date-year">2026</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge soon">Próxima</span>
+              <span class="act-type">Encuentro</span>
+            </div>
+            <h3 class="act-title">Encuentro de montadores/as — Otoño 2026</h3>
+            <p class="act-desc">Jornada de networking y puesta en común del sector: presente y futuro del oficio, condiciones laborales y proyectos de la asociación.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-clock"></i> 11:00 – 14:00</span>
+              <span><i class="fa-solid fa-location-dot"></i> Madrid</span>
+              <span><i class="fa-solid fa-user"></i> Abierto al público</span>
+            </div>
+          </div>
+          <div class="act-action"><a href="/contacto" class="act-link">Más información</a></div>
+        </article>
+
+        <article class="act-card" data-status="upcoming">
+          <figure class="act-thumb"><img src="assets/images/ganadores-ii-amae.jpeg" alt="Gala II Premios AMAE"></figure>
+          <div class="act-date">
+            <span class="act-date-day">28</span>
+            <span class="act-date-mon">Nov</span>
+            <span class="act-date-year">2026</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge soon">Próxima</span>
+              <span class="act-type">Gala</span>
+            </div>
+            <h3 class="act-title">Gala de entrega — II Premios AMAE</h3>
+            <p class="act-desc">Ceremonia de entrega de los II Premios AMAE, con la que reconocemos el trabajo del montaje audiovisual en todas sus categorías.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-clock"></i> 19:00</span>
+              <span><i class="fa-solid fa-location-dot"></i> Cineteca del Matadero, Madrid</span>
+            </div>
+          </div>
+          <div class="act-action"><a href="/premios" class="act-link">Detalles</a></div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ══ PASADAS ══ -->
+    <div class="act-group" data-group="past">
+      <div class="act-group-head">
+        <span class="act-group-tag">Archivo</span>
+        <h2 class="act-group-title">Actividades pasadas</h2>
+        <span class="act-group-note">Histórico de actividades celebradas</span>
+      </div>
+
+      <div class="act-list">
+
+        <article class="act-card" data-status="past">
+          <figure class="act-thumb"><img src="assets/images/premios-amae-alta.jpg" alt="Desmontando los destellos"></figure>
+          <div class="act-date">
+            <span class="act-date-day">15</span>
+            <span class="act-date-mon">May</span>
+            <span class="act-date-year">2026</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge done">Finalizada</span>
+              <span class="act-type">Proyección + coloquio</span>
+            </div>
+            <h3 class="act-title">Desmontando los destellos</h3>
+            <p class="act-desc">Proyección comentada y mesa redonda sobre el montaje como escritura audiovisual, con la participación de montadoras y montadores de la asociación.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-location-dot"></i> Madrid</span>
+              <span><i class="fa-solid fa-users"></i> Aforo completo</span>
+            </div>
+          </div>
+          <div class="act-action"><a href="/desmontando-los-destellos" class="act-link">Ver resumen</a></div>
+        </article>
+
+        <article class="act-card" data-status="past">
+          <figure class="act-thumb"><img src="assets/images/ganadores-ii-amae.jpeg" alt="Técnicas de demo reel"></figure>
+          <div class="act-date">
+            <span class="act-date-day">20</span>
+            <span class="act-date-mon">Mar</span>
+            <span class="act-date-year">2026</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge done">Finalizada</span>
+              <span class="act-type">Curso</span>
+            </div>
+            <h3 class="act-title">Técnicas de demo reel para montadores/as</h3>
+            <p class="act-desc">Taller sobre cómo seleccionar, estructurar y presentar el trabajo propio en un demo reel efectivo para el mercado profesional.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-location-dot"></i> Online</span>
+              <span><i class="fa-solid fa-users"></i> 40 participantes</span>
+            </div>
+          </div>
+          <div class="act-action"><a href="/curso-tecnicas-demo-reel" class="act-link">Ver curso</a></div>
+        </article>
+
+        <article class="act-card" data-status="past">
+          <figure class="act-thumb"><img src="assets/images/ganadores-ii-amae.jpeg" alt="Gala I Premios AMAE"></figure>
+          <div class="act-date">
+            <span class="act-date-day">29</span>
+            <span class="act-date-mon">Nov</span>
+            <span class="act-date-year">2025</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge done">Finalizada</span>
+              <span class="act-type">Gala</span>
+            </div>
+            <h3 class="act-title">Gala de entrega — I Premios AMAE</h3>
+            <p class="act-desc">Primera edición de los Premios AMAE. Una noche para hacer visible el trabajo invisible del montaje audiovisual en España.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-location-dot"></i> Madrid</span>
+              <span><i class="fa-solid fa-trophy"></i> 10 categorías + Premio de Honor</span>
+            </div>
+          </div>
+          <div class="act-action"><a href="/premios" class="act-link">Ver ganadores</a></div>
+        </article>
+
+        <article class="act-card" data-status="past">
+          <figure class="act-thumb"><img src="assets/images/premios-amae-alta.jpg" alt="Montaje de documental"></figure>
+          <div class="act-date">
+            <span class="act-date-day">04</span>
+            <span class="act-date-mon">Oct</span>
+            <span class="act-date-year">2025</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge done">Finalizada</span>
+              <span class="act-type">Masterclass</span>
+            </div>
+            <h3 class="act-title">Montaje de documental: dar forma al material real</h3>
+            <p class="act-desc">Sesión sobre estructura narrativa, selección de material y construcción de arcos emocionales en el montaje documental.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-location-dot"></i> Online</span>
+              <span><i class="fa-solid fa-users"></i> 60 participantes</span>
+            </div>
+          </div>
+          <div class="act-action"><span class="act-link muted">Actividad finalizada</span></div>
+        </article>
+
+        <article class="act-card" data-status="past">
+          <figure class="act-thumb"><img src="assets/images/ganadores-ii-amae.jpeg" alt="Asamblea general 2025"></figure>
+          <div class="act-date">
+            <span class="act-date-day">12</span>
+            <span class="act-date-mon">Jun</span>
+            <span class="act-date-year">2025</span>
+          </div>
+          <div class="act-body">
+            <div class="act-meta">
+              <span class="act-badge done">Finalizada</span>
+              <span class="act-type">Encuentro</span>
+            </div>
+            <h3 class="act-title">Asamblea general de socios/as 2025</h3>
+            <p class="act-desc">Asamblea anual de la asociación: balance del ejercicio, líneas de trabajo y renovación de la junta directiva.</p>
+            <div class="act-info">
+              <span><i class="fa-solid fa-location-dot"></i> Madrid</span>
+              <span><i class="fa-solid fa-user"></i> Socios/as AMAE</span>
+            </div>
+          </div>
+          <div class="act-action"><span class="act-link muted">Actividad finalizada</span></div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Estado vacío (para filtros) -->
+    <div class="act-empty" id="actEmpty">No hay actividades en esta categoría por el momento.</div>
+
+    <!-- CTA -->
+    <div class="cta-band">
+      <div>
+        <h2 class="cta-title">¿No quieres perderte nada?</h2>
+        <p class="cta-text">Suscríbete a nuestra newsletter o hazte socio/a para recibir con antelación las convocatorias de cursos, masterclasses y encuentros de AMAE.</p>
+      </div>
+      <a href="/asociate" class="btn btn-red">Hazte socio/a</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+        <p class="footer-nl-label">Newsletter</p>
+        <div class="footer-nl-form">
+          <input type="email" placeholder="tu@email.com" aria-label="Email">
+          <button type="button">Suscribirse</button>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Asociación</p>
+        <ul class="footer-links">
+          <li><a href="/quienes-somos">Quiénes somos</a></li>
+          <li><a href="/cursos">Cursos</a></li>
+          <li><a href="/recursos">Recursos</a></li>
+          <li><a href="/premios">Premios</a></li>
+          <li><a href="/agenda">Agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Más</p>
+        <ul class="footer-links">
+          <li><a href="/actividades">Actividades</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/areadesocios">Área socios</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Únete</p>
+        <p class="footer-join-text">Forma parte de la comunidad de montadores audiovisuales de España.</p>
+        <a href="/asociate" class="btn btn-red" style="width:100%;justify-content:center;">Hazte socio/a</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© AMAE Asociación de Montadores Audiovisuales de España</p>
+      <nav class="footer-legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Política de cookies</a>
+        <a href="#">Privacidad</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  /* Mobile menu */
+  (function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    var overlay = document.getElementById('menuOverlay');
+    function close() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.querySelector('i').className = 'fa-solid fa-bars'; document.body.style.overflow = ''; }
+    btn.addEventListener('click', function () { var open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); btn.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; document.body.style.overflow = open ? 'hidden' : ''; });
+    overlay.addEventListener('click', close);
+    menu.querySelectorAll('.mobile-menu-panel a').forEach(function(a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  })();
+
+  /* Filtros de actividades */
+  (function () {
+    var filters = document.querySelectorAll('.act-filter');
+    var groups = document.querySelectorAll('.act-group');
+    var empty = document.getElementById('actEmpty');
+
+    function apply(filter) {
+      var anyVisible = false;
+      groups.forEach(function (group) {
+        var match = filter === 'all' || group.getAttribute('data-group') === filter;
+        group.classList.toggle('is-hidden', !match);
+        if (match) anyVisible = true;
+      });
+      empty.classList.toggle('show', !anyVisible);
+    }
+
+    filters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filters.forEach(function (f) { f.classList.remove('active'); });
+        btn.classList.add('active');
+        apply(btn.getAttribute('data-filter'));
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

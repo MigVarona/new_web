@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Área de socios – AMAE</title>
+
+  <link rel="icon" href="https://amae.pro/wp-content/uploads/2019/09/m-de-amae-e1687945093887.jpg" sizes="32x32">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:         #1c1c1c;
+      --bg-alt:     #242424;
+      --bg-dark:    #111111;
+      --accent:     #FF4A47;
+      --accent-h:   #e03c39;
+      --text:       #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --border:     rgba(255,255,255,0.09);
+      --font:       'Montserrat', sans-serif;
+      --nav-h:      68px;
+      --radius:     14px;
+      --t:          0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; width: 100%; }
+
+    /* ── Header ── */
+    .header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--nav-h); background: rgba(24,24,24,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 16px; }
+    .nav-group { display: flex; align-items: center; gap: 2px; }
+    .nav-group a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 7px 11px; border-radius: 7px; letter-spacing: .02em; transition: color var(--t), background var(--t); }
+    .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-group a.active { color: #fff; font-weight: 700; }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
+    .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
+    .nav-social a { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); transition: color var(--t), background var(--t); }
+    .nav-social a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background var(--t), transform var(--t), box-shadow var(--t); }
+    .btn-red { background: var(--accent); color: #fff; }
+    .btn-red:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,74,71,.35); }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 6px; line-height: 1; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .mobile-menu-panel { position: absolute; top: var(--nav-h); left: 0; right: 0; z-index: 1; background: #1a1a1a; border-bottom: 1px solid var(--border); padding: 8px 0 20px; animation: slideDown .22s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+    .mobile-menu-panel a { display: block; padding: 12px 28px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); transition: color var(--t), background var(--t); }
+    .mobile-menu-panel a:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .mobile-menu-social { display: flex; gap: 8px; padding: 16px 28px 0; }
+    .mobile-menu-social a { width: 36px; height: 36px; border-radius: 8px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); border-bottom: none; }
+    .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── Auth layout ── */
+    .auth-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: calc(var(--nav-h) + 56px) 28px 72px; position: relative; overflow: hidden; }
+    .auth-main::before { content: ""; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 680px; height: 680px; background: radial-gradient(circle, rgba(255,74,71,.14), transparent 62%); pointer-events: none; }
+    .auth-card { position: relative; width: 100%; max-width: 420px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 42px 38px 36px; box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+    .auth-tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .auth-title { font-size: 1.9rem; font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1.05; }
+    .auth-desc { margin-top: 12px; font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
+
+    .auth-form { margin-top: 30px; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 8px; }
+    .field-input { position: relative; }
+    .field-input i { position: absolute; top: 50%; left: 15px; transform: translateY(-50%); font-size: 14px; color: rgba(255,255,255,.35); pointer-events: none; }
+    .field-input input { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 9px; padding: 13px 15px 13px 42px; color: #fff; font-family: var(--font); font-size: 14px; outline: none; transition: border-color var(--t), background var(--t); }
+    .field-input input:focus { border-color: var(--accent); background: rgba(255,255,255,.07); }
+    .field-input input::placeholder { color: rgba(255,255,255,.3); }
+    .field-input .toggle-pass { left: auto; right: 6px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: rgba(255,255,255,.4); cursor: pointer; pointer-events: auto; border-radius: 7px; transition: color var(--t); position: absolute; top: 50%; transform: translateY(-50%); }
+    .field-input .toggle-pass:hover { color: #fff; }
+
+    .auth-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 4px 0 24px; }
+    .remember { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); cursor: pointer; user-select: none; }
+    .remember input { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; }
+    .auth-link { font-size: 12.5px; color: var(--text-muted); transition: color var(--t); }
+    .auth-link:hover { color: var(--accent); }
+
+    .auth-submit { width: 100%; padding: 14px; font-size: 12px; border-radius: 999px; }
+    .auth-error { display: none; align-items: center; gap: 9px; margin-bottom: 18px; padding: 11px 14px; border-radius: 9px; background: rgba(255,74,71,.1); border: 1px solid rgba(255,74,71,.35); color: #ff8785; font-size: 12.5px; font-weight: 500; }
+    .auth-error.show { display: flex; }
+
+    .auth-foot { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--text-muted); }
+    .auth-foot a { color: var(--accent); font-weight: 600; }
+    .auth-foot a:hover { color: var(--accent-h); }
+
+    .hint { margin-top: 18px; font-size: 11px; color: rgba(255,255,255,.3); text-align: center; line-height: 1.6; }
+
+    /* ── Logged-in dashboard ── */
+    .dash { display: none; flex: 1; padding: calc(var(--nav-h) + 60px) 0 80px; }
+    .dash.show { display: block; }
+    .dash-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+    .dash-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1; }
+    .dash-sub { margin-top: 12px; font-size: 14px; color: var(--text-muted); }
+    .dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .dash-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; transition: border-color var(--t), transform var(--t); }
+    .dash-card:hover { border-color: rgba(255,255,255,.2); transform: translateY(-3px); }
+    .dash-card i { font-size: 22px; color: var(--accent); margin-bottom: 16px; }
+    .dash-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .dash-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 40px 0; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,.3); transition: color var(--t); }
+    .footer-legal a:hover { color: rgba(255,255,255,.65); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1080px) { .nav-group { display: none; } .nav-mobile-btn { display: flex; } }
+    @media (max-width: 860px)  { .dash-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px)  { :root { --nav-h: 60px; } .nav-social { display: none; } }
+    @media (max-width: 560px)  { .dash-grid { grid-template-columns: 1fr; } .auth-card { padding: 34px 24px 30px; } }
+    @media (max-width: 480px)  { .wrap { padding: 0 16px; } .auth-main { padding-left: 16px; padding-right: 16px; } }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="header">
+  <div class="wrap">
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="nav-mobile-btn" id="menuToggle" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-group">
+          <a href="/quienes-somos">Quiénes somos</a>
+          <a href="/cursos">Cursos</a>
+          <a href="/recursos">Recursos</a>
+          <a href="/premios">Premios</a>
+          <a href="/agenda">Agenda</a>
+        </div>
+      </div>
+      <a href="/" class="nav-logo">
+        <img src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+      </a>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="nav-group">
+          <a href="/actividades">Actividades</a>
+          <a href="/contacto">Contacto</a>
+          <a href="/areadesocios" class="active">Área socios</a>
+        </div>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a href="/asociate" class="btn btn-red">Únete</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <a href="/quienes-somos">Quiénes somos</a>
+    <a href="/cursos">Cursos</a>
+    <a href="/recursos">Recursos</a>
+    <a href="/premios">Premios</a>
+    <a href="/agenda">Agenda</a>
+    <a href="/actividades">Actividades</a>
+    <a href="/contacto">Contacto</a>
+    <a href="/areadesocios" style="color:#fff;font-weight:700;">Área socios</a>
+    <a href="/asociate" style="color:var(--accent);font-weight:700;">Únete →</a>
+    <div class="mobile-menu-social">
+      <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+      <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ LOGIN ════ -->
+<main class="auth-main" id="loginView">
+  <div class="auth-card">
+    <p class="auth-tag">Área de socios</p>
+    <h1 class="auth-title">Acceso privado</h1>
+    <p class="auth-desc">Bienvenido/a al espacio reservado para socios y socias de AMAE. Introduce tus credenciales para acceder a recursos, votaciones y documentación interna.</p>
+
+    <div class="auth-error" id="authError">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span>Usuario o contraseña incorrectos.</span>
+    </div>
+
+    <form class="auth-form" id="loginForm" novalidate>
+      <div class="field">
+        <label for="username">Usuario o email</label>
+        <div class="field-input">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" id="username" name="username" placeholder="tu@email.com" autocomplete="username" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="password">Contraseña</label>
+        <div class="field-input">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+          <button type="button" class="toggle-pass" id="togglePass" aria-label="Mostrar contraseña"><i class="fa-solid fa-eye"></i></button>
+        </div>
+      </div>
+
+      <div class="auth-row">
+        <label class="remember"><input type="checkbox" id="remember"> Recuérdame</label>
+        <a href="#" class="auth-link">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button type="submit" class="btn btn-red auth-submit">Entrar</button>
+    </form>
+
+    <p class="auth-foot">¿Aún no eres socio/a? <a href="/asociate">Únete a AMAE</a></p>
+    <p class="hint">Demo: usuario <strong>socio@amae.pro</strong> · contraseña <strong>amae2026</strong></p>
+  </div>
+</main>
+
+
+<!-- ════ DASHBOARD (tras login) ════ -->
+<section class="dash" id="dashView">
+  <div class="wrap">
+    <div class="dash-head">
+      <div>
+        <p class="auth-tag">Área de socios</p>
+        <h1 class="dash-title">Hola, <span id="dashName">socio/a</span></h1>
+        <p class="dash-sub">Este es tu panel privado como miembro de AMAE.</p>
+      </div>
+      <button type="button" class="btn btn-red" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</button>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-card">
+        <i class="fa-solid fa-folder-open"></i>
+        <h3>Documentación</h3>
+        <p>Estatutos, actas de asambleas y documentación interna de la asociación.</p>
+      </div>
+      <div class="dash-card">
+        <i class="fa-solid fa-check-to-slot"></i>
+        <h3>Votaciones</h3>
+        <p>Participa en las votaciones abiertas y en la elección de los Premios AMAE.</p>
+      </div>
+      <div class="dash-card">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <h3>Recursos formativos</h3>
+        <p>Accede a cursos, tutoriales y materiales exclusivos para socios/as.</p>
+      </div>
+      <div class="dash-card">
+        <i class="fa-solid fa-calendar-days"></i>
+        <h3>Agenda interna</h3>
+        <p>Próximas reuniones, eventos y convocatorias de la asociación.</p>
+      </div>
+      <div class="dash-card">
+        <i class="fa-solid fa-address-book"></i>
+        <h3>Directorio</h3>
+        <p>Contacta con otros montadores y montadoras de la comunidad AMAE.</p>
+      </div>
+      <div class="dash-card">
+        <i class="fa-solid fa-id-card"></i>
+        <h3>Mi perfil</h3>
+        <p>Gestiona tus datos, tu cuota y tus preferencias de comunicación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-bottom">
+      <p class="footer-copy">© AMAE Asociación de Montadores Audiovisuales de España</p>
+      <nav class="footer-legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Política de cookies</a>
+        <a href="#">Privacidad</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  /* Mobile menu */
+  (function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    var overlay = document.getElementById('menuOverlay');
+    function close() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.querySelector('i').className = 'fa-solid fa-bars'; document.body.style.overflow = ''; }
+    btn.addEventListener('click', function () { var open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); btn.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; document.body.style.overflow = open ? 'hidden' : ''; });
+    overlay.addEventListener('click', close);
+    menu.querySelectorAll('.mobile-menu-panel a').forEach(function(a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  })();
+
+  /* Show / hide password */
+  (function () {
+    var toggle = document.getElementById('togglePass');
+    var pass = document.getElementById('password');
+    toggle.addEventListener('click', function () {
+      var show = pass.type === 'password';
+      pass.type = show ? 'text' : 'password';
+      toggle.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+      toggle.setAttribute('aria-label', show ? 'Ocultar contraseña' : 'Mostrar contraseña');
+    });
+  })();
+
+  /* Front-end login (demo). Sustituir por autenticación real en servidor. */
+  (function () {
+    var DEMO_USER = 'socio@amae.pro';
+    var DEMO_PASS = 'amae2026';
+
+    var form = document.getElementById('loginForm');
+    var error = document.getElementById('authError');
+    var loginView = document.getElementById('loginView');
+    var dashView = document.getElementById('dashView');
+    var dashName = document.getElementById('dashName');
+    var logoutBtn = document.getElementById('logoutBtn');
+
+    function enterDash(name) {
+      dashName.textContent = name || 'socio/a';
+      loginView.style.display = 'none';
+      dashView.classList.add('show');
+    }
+    function exitDash() {
+      dashView.classList.remove('show');
+      loginView.style.display = 'flex';
+      form.reset();
+    }
+
+    /* Restaurar sesión recordada */
+    try {
+      var saved = localStorage.getItem('amae_user');
+      if (saved) enterDash(saved.split('@')[0]);
+    } catch (e) {}
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var user = document.getElementById('username').value.trim();
+      var pass = document.getElementById('password').value;
+      var remember = document.getElementById('remember').checked;
+
+      if (user.toLowerCase() === DEMO_USER && pass === DEMO_PASS) {
+        error.classList.remove('show');
+        if (remember) { try { localStorage.setItem('amae_user', user); } catch (e) {} }
+        enterDash(user.split('@')[0]);
+      } else {
+        error.classList.add('show');
+        document.getElementById('password').value = '';
+      }
+    });
+
+    logoutBtn.addEventListener('click', function () {
+      try { localStorage.removeItem('amae_user'); } catch (e) {}
+      exitDash();
+    });
+  })();
+</script>
+
+</body>
+</html>
