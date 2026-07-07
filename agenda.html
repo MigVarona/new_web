@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda – AMAE</title>
+
+  <link rel="icon" href="https://amae.pro/wp-content/uploads/2019/09/m-de-amae-e1687945093887.jpg" sizes="32x32">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg:         #1c1c1c;
+      --bg-alt:     #242424;
+      --bg-dark:    #111111;
+      --accent:     #FF4A47;
+      --accent-h:   #e03c39;
+      --text:       #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --border:     rgba(255,255,255,0.09);
+      --font:       'Montserrat', sans-serif;
+      --nav-h:      68px;
+      --radius:     14px;
+      --t:          0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Header ── */
+    .header { position: fixed; inset: 0 0 auto 0; z-index: 200; height: var(--nav-h); background: rgba(24,24,24,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 16px; }
+    .nav-group { display: flex; align-items: center; gap: 2px; }
+    .nav-group a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 7px 11px; border-radius: 7px; letter-spacing: .02em; transition: color var(--t), background var(--t); }
+    .nav-group a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-group a.active { color: #fff; font-weight: 700; }
+    .nav-logo img { height: 46px; width: auto; filter: brightness(1.15); transition: filter var(--t); }
+    .nav-logo:hover img { filter: brightness(1.35); }
+    .nav-social { display: flex; align-items: center; gap: 2px; margin: 0 8px; }
+    .nav-social a { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); transition: color var(--t), background var(--t); }
+    .nav-social a:hover { color: #fff; background: rgba(255,255,255,0.09); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; transition: background var(--t), transform var(--t), box-shadow var(--t); }
+    .btn-red { background: var(--accent); color: #fff; }
+    .btn-red:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,74,71,.35); }
+    .nav-mobile-btn { display: none; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 6px; line-height: 1; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 199; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); }
+    .mobile-menu-panel { position: absolute; top: var(--nav-h); left: 0; right: 0; z-index: 1; background: #1a1a1a; border-bottom: 1px solid var(--border); padding: 8px 0 20px; animation: slideDown .22s ease; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-12px); } to { opacity:1; transform: none; } }
+    .mobile-menu-panel a { display: block; padding: 12px 28px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,.75); border-bottom: 1px solid rgba(255,255,255,.04); transition: color var(--t), background var(--t); }
+    .mobile-menu-panel a:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .mobile-menu-social { display: flex; gap: 8px; padding: 16px 28px 0; }
+    .mobile-menu-social a { width: 36px; height: 36px; border-radius: 8px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); border-bottom: none; }
+    .mobile-menu-social a:hover { background: var(--accent) !important; color: #fff !important; }
+
+    /* ── Page hero ── */
+    .page-hero { padding-top: calc(var(--nav-h) + 60px); padding-bottom: 44px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .page-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .page-hero-title { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1; }
+    .page-hero-desc { margin-top: 14px; font-size: 15px; color: var(--text-muted); max-width: 560px; line-height: 1.75; }
+
+    /* ── Calendar ── */
+    .cal-section { padding: 44px 0 96px; background: var(--bg); }
+
+    /* Toolbar */
+    .cal-toolbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .cal-nav { display: flex; align-items: center; gap: 8px; }
+    .cal-arrow { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-alt); border: 1px solid var(--border); color: #fff; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background var(--t), border-color var(--t); }
+    .cal-arrow:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); }
+    .cal-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; letter-spacing: -.02em; text-transform: capitalize; min-width: 220px; }
+    .cal-today-btn { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text-muted); font-family: var(--font); font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: color var(--t), background var(--t), border-color var(--t); }
+    .cal-today-btn:hover { color: #fff; border-color: rgba(255,255,255,.25); }
+    .cal-legend { display: flex; align-items: center; gap: 16px; margin-left: auto; flex-wrap: wrap; }
+    .cal-legend span { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-muted); }
+    .cal-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .cal-dot.masterclass { background: #FF4A47; }
+    .cal-dot.encuentro   { background: #6fdc8c; }
+    .cal-dot.gala        { background: #f5b64a; }
+    .cal-dot.convocatoria{ background: #6aa8ff; }
+
+    /* Grid */
+    .cal-grid { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg-alt); }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); background: var(--bg-dark); }
+    .cal-weekdays div { padding: 12px 10px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); text-align: left; border-right: 1px solid var(--border); }
+    .cal-weekdays div:last-child { border-right: none; }
+    .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .cal-cell { min-height: 118px; padding: 8px 8px 10px; border-right: 1px solid var(--border); border-top: 1px solid var(--border); position: relative; display: flex; flex-direction: column; gap: 5px; }
+    .cal-cell:nth-child(7n) { border-right: none; }
+    .cal-cell.out { background: rgba(0,0,0,.16); }
+    .cal-cell.out .cal-daynum { color: rgba(255,255,255,.22); }
+    .cal-cell.today { background: rgba(255,74,71,.06); }
+    .cal-daynum { font-size: 13px; font-weight: 700; color: var(--text-muted); width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+    .cal-cell.today .cal-daynum { background: var(--accent); color: #fff; }
+
+    .cal-event { text-align: left; width: 100%; border: none; cursor: pointer; font-family: var(--font); font-size: 11.5px; font-weight: 600; line-height: 1.3; color: #fff; padding: 4px 8px; border-radius: 6px; display: flex; align-items: center; gap: 6px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; transition: filter var(--t), transform var(--t); }
+    .cal-event:hover { filter: brightness(1.15); transform: translateX(1px); }
+    .cal-event .lbl { overflow: hidden; text-overflow: ellipsis; }
+    .cal-event.masterclass { background: rgba(255,74,71,.22); box-shadow: inset 3px 0 0 #FF4A47; }
+    .cal-event.encuentro   { background: rgba(111,220,140,.18); box-shadow: inset 3px 0 0 #6fdc8c; }
+    .cal-event.gala        { background: rgba(245,182,74,.18); box-shadow: inset 3px 0 0 #f5b64a; }
+    .cal-event.convocatoria{ background: rgba(106,168,255,.18); box-shadow: inset 3px 0 0 #6aa8ff; }
+
+    /* Detail panel */
+    .cal-detail { margin-top: 22px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; display: none; }
+    .cal-detail.show { display: block; animation: slideDown .2s ease; }
+    .cal-detail-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+    .cal-detail-type { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.08); color: var(--text-muted); }
+    .cal-detail-date { font-size: 12px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 7px; }
+    .cal-detail-date i { color: var(--accent); }
+    .cal-detail-title { font-size: 20px; font-weight: 800; line-height: 1.25; }
+    .cal-detail-desc { margin-top: 8px; font-size: 14px; color: var(--text-muted); line-height: 1.7; max-width: 720px; }
+    .cal-detail-info { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 14px; }
+    .cal-detail-info span { font-size: 12px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; }
+    .cal-detail-info i { color: var(--accent); font-size: 11px; }
+    .cal-detail-actions { margin-top: 18px; }
+    .cal-detail-link { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #fff; padding: 10px 20px; border-radius: 999px; background: var(--accent); transition: background var(--t); }
+    .cal-detail-link:hover { background: var(--accent-h); }
+    .cal-detail-empty { font-size: 13px; color: var(--text-muted); }
+
+    /* ── CTA ── */
+    .cta-band { margin-top: 44px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+    .cta-title { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; line-height: 1.1; }
+    .cta-text { margin-top: 12px; max-width: 640px; font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 64px 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+    .footer-logo { height: 38px; width: auto; margin-bottom: 28px; }
+    .footer-nl-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-nl-form { display: flex; gap: 8px; }
+    .footer-nl-form input { flex: 1; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 7px; padding: 10px 14px; color: #fff; font-family: var(--font); font-size: 13px; outline: none; transition: border-color var(--t); }
+    .footer-nl-form input:focus { border-color: rgba(255,255,255,.35); }
+    .footer-nl-form input::placeholder { color: rgba(255,255,255,.3); }
+    .footer-nl-form button { background: var(--accent); color: #fff; border: none; border-radius: 7px; padding: 10px 18px; cursor: pointer; font-family: var(--font); font-size: 12px; font-weight: 700; transition: background var(--t); white-space: nowrap; }
+    .footer-nl-form button:hover { background: var(--accent-h); }
+    .footer-social { display: flex; gap: 6px; margin-top: 20px; }
+    .footer-social a { width: 34px; height: 34px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255,255,255,.06); color: var(--text-muted); transition: background var(--t), color var(--t); }
+    .footer-social a:hover { background: var(--accent); color: #fff; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,.6); transition: color var(--t); }
+    .footer-links a:hover { color: #fff; }
+    .footer-join-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,.3); transition: color var(--t); }
+    .footer-legal a:hover { color: rgba(255,255,255,.65); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1080px) { .nav-group { display: none; } .nav-mobile-btn { display: flex; } }
+    @media (max-width: 860px) {
+      .cal-legend { margin-left: 0; width: 100%; }
+      .cta-band { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px)  {
+      :root { --nav-h: 60px; }
+      .nav-social { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      /* Calendar becomes horizontally scrollable to preserve the grid */
+      .cal-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .cal-grid { min-width: 640px; }
+      .cal-cell { min-height: 96px; }
+    }
+    @media (max-width: 560px)  { .cta-band { padding: 28px; } }
+    @media (max-width: 480px)  { .wrap { padding: 0 16px; } .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+  </style>
+</head>
+<body>
+
+<!-- ════ HEADER ════ -->
+<header class="header">
+  <div class="wrap">
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <button class="nav-mobile-btn" id="menuToggle" aria-label="Menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-group">
+          <a href="/quienes-somos">Quiénes somos</a>
+          <a href="/cursos">Cursos</a>
+          <a href="/recursos">Recursos</a>
+          <a href="/premios">Premios</a>
+          <a href="/agenda" class="active">Agenda</a>
+        </div>
+      </div>
+      <a href="/" class="nav-logo">
+        <img src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+      </a>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div class="nav-group">
+          <a href="/actividades">Actividades</a>
+          <a href="/contacto">Contacto</a>
+          <a href="/areadesocios">Área socios</a>
+        </div>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a href="/asociate" class="btn btn-red">Únete</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  <div class="mobile-menu-panel">
+    <a href="/quienes-somos">Quiénes somos</a>
+    <a href="/cursos">Cursos</a>
+    <a href="/recursos">Recursos</a>
+    <a href="/premios">Premios</a>
+    <a href="/agenda" style="color:#fff;font-weight:700;">Agenda</a>
+    <a href="/actividades">Actividades</a>
+    <a href="/contacto">Contacto</a>
+    <a href="/areadesocios">Área socios</a>
+    <a href="/asociate" style="color:var(--accent);font-weight:700;">Únete →</a>
+    <div class="mobile-menu-social">
+      <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+      <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════ PAGE HERO ════ -->
+<section class="page-hero">
+  <div class="wrap">
+    <p class="page-hero-tag">Calendario</p>
+    <h1 class="page-hero-title">Agenda</h1>
+    <p class="page-hero-desc">Consulta en formato calendario los encuentros, cursos, masterclasses y convocatorias de AMAE. Pulsa cualquier evento para ver sus detalles. ¿Buscas lo ya celebrado? Consulta el <a href="/actividades" style="color:var(--accent);">histórico de actividades</a>.</p>
+  </div>
+</section>
+
+
+<!-- ════ CALENDARIO ════ -->
+<section class="cal-section">
+  <div class="wrap">
+
+    <div class="cal-toolbar">
+      <div class="cal-nav">
+        <button class="cal-arrow" id="calPrev" aria-label="Mes anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="cal-arrow" id="calNext" aria-label="Mes siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <h2 class="cal-title" id="calTitle">—</h2>
+      <button class="cal-today-btn" id="calToday">Hoy</button>
+      <div class="cal-legend">
+        <span><i class="cal-dot masterclass"></i> Masterclass / Curso</span>
+        <span><i class="cal-dot encuentro"></i> Encuentro</span>
+        <span><i class="cal-dot gala"></i> Gala</span>
+        <span><i class="cal-dot convocatoria"></i> Convocatoria</span>
+      </div>
+    </div>
+
+    <div class="cal-scroll">
+      <div class="cal-grid">
+        <div class="cal-weekdays">
+          <div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div>
+        </div>
+        <div class="cal-days" id="calDays"></div>
+      </div>
+    </div>
+
+    <!-- Panel de detalle -->
+    <div class="cal-detail" id="calDetail" aria-live="polite">
+      <div class="cal-detail-head">
+        <span class="cal-detail-type" id="cdType"></span>
+        <span class="cal-detail-date" id="cdDate"><i class="fa-solid fa-calendar-day"></i> <span></span></span>
+      </div>
+      <h3 class="cal-detail-title" id="cdTitle"></h3>
+      <p class="cal-detail-desc" id="cdDesc"></p>
+      <div class="cal-detail-info" id="cdInfo"></div>
+      <div class="cal-detail-actions" id="cdActions"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band">
+      <div>
+        <h2 class="cta-title">¿No quieres perderte nada?</h2>
+        <p class="cta-text">Suscríbete a nuestra newsletter o hazte socio/a para recibir con antelación las convocatorias de cursos, masterclasses y encuentros de AMAE.</p>
+      </div>
+      <a href="/asociate" class="btn btn-red">Hazte socio/a</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════ FOOTER ════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://amae.pro/wp-content/uploads/2025/11/logtipo01_glitch0_rgb_blanco.png" alt="AMAE">
+        <p class="footer-nl-label">Newsletter</p>
+        <div class="footer-nl-form">
+          <input type="email" placeholder="tu@email.com" aria-label="Email">
+          <button type="button">Suscribirse</button>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/amae.pro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@amae1796" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://vimeo.com/amaemontaje" target="_blank" rel="noopener" aria-label="Vimeo"><i class="fa-brands fa-vimeo-v"></i></a>
+          <a href="https://es.linkedin.com/in/amae-asociaci%C3%B3n-de-montadores-audiovisuales-de-espa%C3%B1a-7bb82b226a" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Asociación</p>
+        <ul class="footer-links">
+          <li><a href="/quienes-somos">Quiénes somos</a></li>
+          <li><a href="/cursos">Cursos</a></li>
+          <li><a href="/recursos">Recursos</a></li>
+          <li><a href="/premios">Premios</a></li>
+          <li><a href="/agenda">Agenda</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Más</p>
+        <ul class="footer-links">
+          <li><a href="/actividades">Actividades</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+          <li><a href="/areadesocios">Área socios</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Únete</p>
+        <p class="footer-join-text">Forma parte de la comunidad de montadores audiovisuales de España.</p>
+        <a href="/asociate" class="btn btn-red" style="width:100%;justify-content:center;">Hazte socio/a</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© AMAE Asociación de Montadores Audiovisuales de España</p>
+      <nav class="footer-legal">
+        <a href="#">Aviso legal</a>
+        <a href="#">Política de cookies</a>
+        <a href="#">Privacidad</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════ SCRIPTS ════ -->
+<script>
+  /* Mobile menu */
+  (function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileMenu');
+    var overlay = document.getElementById('menuOverlay');
+    function close() { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.querySelector('i').className = 'fa-solid fa-bars'; document.body.style.overflow = ''; }
+    btn.addEventListener('click', function () { var open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)); btn.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; document.body.style.overflow = open ? 'hidden' : ''; });
+    overlay.addEventListener('click', close);
+    menu.querySelectorAll('.mobile-menu-panel a').forEach(function(a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+  })();
+
+  /* ── Calendario (solo UI) ── */
+  (function () {
+    // Datos de eventos. date en formato YYYY-MM-DD. type: masterclass | encuentro | gala | convocatoria
+    var EVENTS = [
+      { date:'2026-06-30', type:'convocatoria', title:'II Premios AMAE — Cierre del periodo de obras', time:'Todo el día', place:'Ámbito nacional', desc:'Último día para que las obras estrenadas entre el 1 de julio de 2025 y el 30 de junio de 2026 entren en la segunda edición de los Premios AMAE.', link:'/premios', linkText:'Ver premios' },
+      { date:'2026-07-18', type:'masterclass', title:'El ritmo invisible: montaje de secuencias de acción', time:'18:00 – 20:30', place:'Online', desc:'Sesión práctica sobre construcción del ritmo, continuidad y tensión en secuencias de acción, con análisis de casos y trabajo sobre timeline.', link:'/contacto', linkText:'Inscribirse' },
+      { date:'2026-09-26', type:'encuentro', title:'Encuentro de montadores/as — Otoño 2026', time:'11:00 – 14:00', place:'Madrid', desc:'Jornada de networking y puesta en común del sector: presente y futuro del oficio, condiciones laborales y proyectos de la asociación.', link:'/contacto', linkText:'Más información' },
+      { date:'2026-11-28', type:'gala', title:'Gala de entrega — II Premios AMAE', time:'19:00', place:'Cineteca del Matadero, Madrid', desc:'Ceremonia de entrega de los II Premios AMAE, con la que reconocemos el trabajo del montaje audiovisual en todas sus categorías.', link:'/premios', linkText:'Detalles' }
+    ];
+    var TYPE_LABEL = { masterclass:'Masterclass', encuentro:'Encuentro', gala:'Gala', convocatoria:'Convocatoria' };
+
+    var MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+    var daysEl   = document.getElementById('calDays');
+    var titleEl  = document.getElementById('calTitle');
+    var detailEl = document.getElementById('calDetail');
+
+    var today = new Date(); today.setHours(0,0,0,0);
+    var todayKey = keyOf(today);
+
+    // Arrancamos en el primer mes que tenga eventos (o el mes actual si no hay futuros)
+    var start = firstEventDate() || today;
+    var view = new Date(start.getFullYear(), start.getMonth(), 1);
+
+    function keyOf(d) {
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+    function firstEventDate() {
+      var future = EVENTS.map(function(e){ return e.date; }).sort();
+      for (var i=0;i<future.length;i++){ if (future[i] >= todayKey) return parseKey(future[i]); }
+      return future.length ? parseKey(future[future.length-1]) : null;
+    }
+    function parseKey(k){ var p = k.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+
+    function eventsOn(key) { return EVENTS.filter(function(e){ return e.date === key; }); }
+
+    function render() {
+      titleEl.textContent = MONTHS[view.getMonth()] + ' ' + view.getFullYear();
+      daysEl.innerHTML = '';
+
+      var year = view.getFullYear(), month = view.getMonth();
+      var first = new Date(year, month, 1);
+      // getDay(): 0=Dom … convertimos a lunes-primero
+      var lead = (first.getDay() + 6) % 7;
+      var startCell = new Date(year, month, 1 - lead);
+
+      for (var i = 0; i < 42; i++) {
+        var d = new Date(startCell.getFullYear(), startCell.getMonth(), startCell.getDate() + i);
+        var key = keyOf(d);
+        var out = d.getMonth() !== month;
+
+        var cell = document.createElement('div');
+        cell.className = 'cal-cell' + (out ? ' out' : '') + (key === todayKey ? ' today' : '');
+
+        var num = document.createElement('div');
+        num.className = 'cal-daynum';
+        num.textContent = d.getDate();
+        cell.appendChild(num);
+
+        eventsOn(key).forEach(function(ev) {
+          var btn = document.createElement('button');
+          btn.className = 'cal-event ' + ev.type;
+          btn.innerHTML = '<span class="lbl">' + ev.title + '</span>';
+          btn.title = ev.title;
+          btn.addEventListener('click', function(){ showDetail(ev); });
+          cell.appendChild(btn);
+        });
+
+        daysEl.appendChild(cell);
+      }
+    }
+
+    function showDetail(ev) {
+      var d = parseKey(ev.date);
+      var dateStr = d.getDate() + ' de ' + MONTHS[d.getMonth()].toLowerCase() + ' de ' + d.getFullYear();
+      document.getElementById('cdType').textContent = TYPE_LABEL[ev.type] || '';
+      document.querySelector('#cdDate span').textContent = dateStr;
+      document.getElementById('cdTitle').textContent = ev.title;
+      document.getElementById('cdDesc').textContent = ev.desc;
+      document.getElementById('cdInfo').innerHTML =
+        '<span><i class="fa-solid fa-clock"></i> ' + ev.time + '</span>' +
+        '<span><i class="fa-solid fa-location-dot"></i> ' + ev.place + '</span>';
+      document.getElementById('cdActions').innerHTML =
+        '<a class="cal-detail-link" href="' + ev.link + '">' + (ev.linkText || 'Más información') + '</a>';
+      detailEl.classList.add('show');
+      detailEl.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    }
+
+    document.getElementById('calPrev').addEventListener('click', function(){ view.setMonth(view.getMonth()-1); render(); });
+    document.getElementById('calNext').addEventListener('click', function(){ view.setMonth(view.getMonth()+1); render(); });
+    document.getElementById('calToday').addEventListener('click', function(){ view = new Date(today.getFullYear(), today.getMonth(), 1); render(); });
+
+    render();
+  })();
+</script>
+
+</body>
+</html>
